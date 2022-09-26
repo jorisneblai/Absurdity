@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect } from 'react';
-
+import { Icon } from 'semantic-ui-react';
+import './LogFormLogIn.scss';
 import axios from 'axios';
 
 const LogFormLogIn = () => {
@@ -10,7 +11,6 @@ const LogFormLogIn = () => {
     const [pwd, setPwd] = useState('');
     const [errMsg, setErrMsg] = useState('');
     const [success, setSuccess] = useState(false);
-    const [token, setToken] = useState('');
     const [role, setRole] = useState('');
 
     useEffect(() => {
@@ -25,30 +25,27 @@ const LogFormLogIn = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.post("http://localhost:3000/login",
+            const response = await axios.post("http://nicolas-defranould.vpnuser.lan:3000/login",
                 JSON.stringify({ user, pwd }),
                 {
                     headers: { 'Content-Type': 'application/json' },
-                    withCredentials: true
                 }
             );
             console.log(JSON.stringify(response.data));
-            setToken(response.data.accessToken);
             setRole(response.data.roles);
             setUser('');
             setPwd('');
             setSuccess(true);
-            console.log("token:", token);
             console.log("role:", role);
         } catch (err) {
             if (!err.response) {
-                setErrMsg('No Server Response');
+                setErrMsg('Pas de réponse du serveur');
             } else if (err.response.status === 400) {
-                setErrMsg('Missing Username or Password');
+                setErrMsg("Nom d'utilisateur.trice ou mot de passe manquant");
             } else if (err.response.status === 401) {
-                setErrMsg('Unauthorized');
+                setErrMsg('Non autorisé.e');
             } else {
-                setErrMsg('Login Failed');
+                setErrMsg('Échec de la connexion');
             }
             errRef.current.focus();
         }
@@ -58,18 +55,19 @@ const LogFormLogIn = () => {
         <div className='LogFormLogIn'>
             {success ? (
                 <section>
-                    <h1>You are logged in!</h1>
+                    <h1>Vous êtes connecté.e !</h1>
                     <br />
                     <p>
-                        <a href="#">Go to Home</a>
+                        <a href="#">Retour à l'Accueil</a>
                     </p>
                 </section>
             ) : (
                 <section>
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-                    <h1>Sign In</h1>
+                    <h1>Se connecter</h1>
+                    <Icon name="circle"></Icon>
                     <form onSubmit={handleSubmit}>
-                        <label htmlFor="username">Username:</label>
+                        <label htmlFor="username">Nom d'utilisateur :</label>
                         <input
                             type="text"
                             id="username"
@@ -80,7 +78,7 @@ const LogFormLogIn = () => {
                             required
                         />
 
-                        <label htmlFor="password">Password:</label>
+                        <label htmlFor="password">Mot de passe :</label>
                         <input
                             type="password"
                             id="password"
@@ -88,13 +86,13 @@ const LogFormLogIn = () => {
                             value={pwd}
                             required
                         />
-                        <button>Sign In</button>
+                        <button>Se connecter</button>
                     </form>
                     <p>
-                        Need an Account?<br />
+                        Pas encore inscrit.e ?<br />
                         <span className="line">
                             {/*put router link here*/}
-                            <a href="#">Sign Up</a>
+                            <a href="#">S'inscrire</a>
                         </span>
                     </p>
                 </section>

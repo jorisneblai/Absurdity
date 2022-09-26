@@ -37,13 +37,15 @@ function LogFormSignUp() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        const pseudo = user;
+        const password = pwd; 
+        const email = 'test3@test.com'
         try {
-            const response = await axios.post("http://localhost:3000/sign-up",
-                JSON.stringify({ user, pwd }),
+            const response = await axios.post("http://nicolas-defranould.vpnuser.lan:3000/sign-up",
+                JSON.stringify({ pseudo, email, password }),
                 {
                     headers: { 'Content-Type': 'application/json' },
-                    withCredentials: true
+
                 }
             );
             console.log(response.data);
@@ -70,7 +72,7 @@ function LogFormSignUp() {
                 <section>
                     <h1>Success!</h1>
                     <p>
-                        <a href="#">Sign In</a>
+                        <a href="#">Sign Up</a>
                     </p>
                 </section>
             ) : (

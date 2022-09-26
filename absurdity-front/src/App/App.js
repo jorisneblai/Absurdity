@@ -1,6 +1,5 @@
+import './App.scss';
 import LogPage from '../Components/LogPage/LogPage';
-import './App.css';
-
 
 function App() {
   return (
