@@ -3,7 +3,7 @@ import './LogFormSignUp.scss';
 import axios from 'axios';
 import { Icon } from 'semantic-ui-react';
 
-function LogFormSignUp() {
+function LogFormSignUp(  ) {
     const userRef = useRef();
     const errRef = useRef();
 
@@ -57,11 +57,11 @@ function LogFormSignUp() {
             setMatchPwd('');
         } catch (err) {
             if (!err.response) {
-                setErrMsg('No Server Response');
+                setErrMsg("Pas de réponse du serveur");
             } else if (err.response.status === 409) {
-                setErrMsg('Username Taken');
+                setErrMsg("Nom d'utilisateur déjà pris");
             } else {
-                setErrMsg('Registration Failed')
+                setErrMsg("Échec de la connexion")
             }
             errRef.current.focus();
         }
@@ -70,82 +70,82 @@ function LogFormSignUp() {
         <div className="LogFormSignUp">
              {success ? (
                 <section>
-                    <h1>Success!</h1>
+                    <h1>Vous êtes inscrit.e !</h1>
                     <p>
-                        <a href="#">Sign Up</a>
+                        <a href="#">S'inscrire</a>
                     </p>
                 </section>
             ) : (
                 <section>
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-                    <h1>Register</h1>
+                    <h1>S'inscrire</h1>
                     <form onSubmit={handleSubmit}>
                         <label htmlFor="username">
-                            Username:
+                            Pseudo :
                         </label>
                         <input
                             type="text"
                             id="username"
                             ref={userRef}
                             autoComplete="off"
-                            onChange={(e) => setUser(e.target.value)}
+                            onChange={(event) => setUser(event.target.value)}
                             value={user}
                             required
                             onFocus={() => setUserFocus(true)}
                             onBlur={() => setUserFocus(false)}
                         />
-                        <p id="uidnote" className={userFocus && user ? "instructions" : "offscreen"}>
+                        {/* <p id="uidnote" className={userFocus && user ? "instructions" : "offscreen"}>
                             <Icon name="info"></Icon>
                             4 to 24 characters.<br />
                             Must begin with a letter.<br />
                             Letters, numbers, underscores, hyphens allowed.
-                        </p>
+                        </p> */}
 
 
                         <label htmlFor="password">
-                            Password:
+                            Mot de passe :
                         </label>
                         <input
                             type="password"
                             id="password"
-                            onChange={(e) => setPwd(e.target.value)}
+                            onChange={(event) => setPwd(event.target.value)}
                             value={pwd}
                             required
                             onFocus={() => setPwdFocus(true)}
                             onBlur={() => setPwdFocus(false)}
                         />
-                        <p id="pwdnote" className={pwdFocus ? "instructions" : "offscreen"}>
+                        {/* <p id="pwdnote" className={pwdFocus ? "instructions" : "offscreen"}>
                             <Icon name="info"></Icon>
                             8 to 24 characters.<br />
                             Must include uppercase and lowercase letters, a number and a special character.<br />
                             Allowed special characters: <span aria-label="exclamation mark">!</span> <span aria-label="at symbol">@</span> <span aria-label="hashtag">#</span> <span aria-label="dollar sign">$</span> <span aria-label="percent">%</span>
-                        </p>
+                        </p> */}
 
 
                         <label htmlFor="confirm_pwd">
-                            Confirm Password:
+                            Confirmation du mot de passe :
                         </label>
                         <input
                             type="password"
                             id="confirm_pwd"
-                            onChange={(e) => setMatchPwd(e.target.value)}
+                            onChange={(event) => setMatchPwd(event.target.value)}
                             value={matchPwd}
                             required
                             onFocus={() => setMatchFocus(true)}
                             onBlur={() => setMatchFocus(false)}
                         />
-                        <p id="confirmnote" className={matchFocus ? "instructions" : "offscreen"}>
+                        {/* <p id="confirmnote" className={matchFocus ? "instructions" : "offscreen"}>
                             <Icon name="info"></Icon>  
                             Must match the first password input field.
-                        </p>
+                        </p> */}
 
-                        <button>Sign Up</button>
+                        <button>S'inscrire</button>
                     </form>
                     <p>
-                        Already registered?<br />
+                        Déjà inscrit.e ?<br />
                         <span className="line">
                             {/*put router link here*/}
-                            <a href="#">Sign In</a>
+                            <a href="#">Se connecter</a>
                         </span>
                     </p>
                 </section>

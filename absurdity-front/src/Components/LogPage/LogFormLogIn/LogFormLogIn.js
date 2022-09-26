@@ -1,5 +1,4 @@
 import { useRef, useState, useEffect } from 'react';
-import { Icon } from 'semantic-ui-react';
 import './LogFormLogIn.scss';
 import axios from 'axios';
 
@@ -39,13 +38,13 @@ const LogFormLogIn = () => {
             console.log("role:", role);
         } catch (err) {
             if (!err.response) {
-                setErrMsg('Pas de réponse du serveur');
+                setErrMsg("Pas de réponse du serveur");
             } else if (err.response.status === 400) {
                 setErrMsg("Nom d'utilisateur.trice ou mot de passe manquant");
             } else if (err.response.status === 401) {
-                setErrMsg('Non autorisé.e');
+                setErrMsg("Non autorisé.e");
             } else {
-                setErrMsg('Échec de la connexion');
+                setErrMsg("Échec de la connexion");
             }
             errRef.current.focus();
         }
@@ -65,9 +64,8 @@ const LogFormLogIn = () => {
                 <section>
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
                     <h1>Se connecter</h1>
-                    <Icon name="circle"></Icon>
                     <form onSubmit={handleSubmit}>
-                        <label htmlFor="username">Nom d'utilisateur :</label>
+                        <label htmlFor="username">Pseudo :</label>
                         <input
                             type="text"
                             id="username"
