@@ -4,11 +4,11 @@ import LogMenu from "./LogMenu/LogMenu";
 
 function LogPage() {
   return ( 
-    <div className="LogPage">
+    <section className="LogPage">
       <LogMenu/>
-      <LogFormSignUp/>
+      {/*<LogFormSignUp/>*/}
       <LogFormLogIn/>
-    </div>
+    </section>
   );
 }
 

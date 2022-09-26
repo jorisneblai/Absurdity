@@ -1,5 +1,9 @@
 function LogMenu() {
-    return (  );
+    return (         
+      <nav className="LogMenu">
+            
+      </nav> 
+    );
 }
 
 export default LogMenu;

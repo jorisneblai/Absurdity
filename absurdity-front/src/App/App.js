@@ -4,9 +4,9 @@ import './App.css';
 
 function App() {
   return (
-    <div className="App">
-    <LogPage/>
-    </div>
+    <main className="App">
+      <LogPage/>
+    </main>
   );
 }
 
