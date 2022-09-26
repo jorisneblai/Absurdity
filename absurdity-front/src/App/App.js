@@ -1,9 +1,11 @@
+import LogPage from '../Components/LogPage/LogPage';
 import './App.css';
+
 
 function App() {
   return (
     <div className="App">
-    <p>Hello</p>
+    <LogPage/>
     </div>
   );
 }
