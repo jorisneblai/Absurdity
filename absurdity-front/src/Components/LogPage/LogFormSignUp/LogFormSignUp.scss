@@ -23,9 +23,12 @@ body {
   min-height: 100vh; 
   padding: 1rem 0.5rem;
 }
-
+.LogFormSignUp {
+    font-size: 22px;
+    color: #fff;
+}
 section {
-    width: 100%;
+    width:100%;
     max-width: 420px;
     min-height: 400px;
     display: flex;

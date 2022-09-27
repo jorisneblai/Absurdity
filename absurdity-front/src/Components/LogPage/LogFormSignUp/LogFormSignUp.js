@@ -42,7 +42,7 @@ function LogFormSignUp(  ) {
         const email = 'test3@test.com'
         try {
             const response = await axios.post("http://nicolas-defranould.vpnuser.lan:3000/sign-up",
-                JSON.stringify({ pseudo, email, password }),
+                JSON.stringify({ pseudo, password, email }),
                 {
                     headers: { 'Content-Type': 'application/json' },
 

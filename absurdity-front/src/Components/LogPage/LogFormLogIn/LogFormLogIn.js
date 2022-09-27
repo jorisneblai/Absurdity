@@ -22,10 +22,15 @@ const LogFormLogIn = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        const pseudo = user;
+        const password = pwd;
+        console.log(password);
+        if(!pseudo || !password) {
+            setErrMsg("Nom d'utilisateur.trice ou mot de passe manquant");
+        } else {
         try {
             const response = await axios.post("http://nicolas-defranould.vpnuser.lan:3000/login",
-                JSON.stringify({ user, pwd }),
+                JSON.stringify({ pseudo, password }),
                 {
                     headers: { 'Content-Type': 'application/json' },
                 }
@@ -35,19 +40,20 @@ const LogFormLogIn = () => {
             setUser('');
             setPwd('');
             setSuccess(true);
-            console.log("role:", role);
+            console.log("role:", response.data.role);
         } catch (err) {
             if (!err.response) {
                 setErrMsg("Pas de réponse du serveur");
             } else if (err.response.status === 400) {
                 setErrMsg("Nom d'utilisateur.trice ou mot de passe manquant");
             } else if (err.response.status === 401) {
-                setErrMsg("Non autorisé.e");
+                setErrMsg("Non autorisé.e, Pseudo, Email ou Mot de passe incorrect.");
             } else {
                 setErrMsg("Échec de la connexion");
             }
             errRef.current.focus();
         }
+    }
     }
 
     return (
