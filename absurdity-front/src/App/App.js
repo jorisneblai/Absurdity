@@ -8,10 +8,10 @@ function App() {
   return (
     <main className="App">
       
-        <Header/>
+        
         <Routes>
-          
-          <Route path='/login' element={<LogPage />} />
+          <Route path="/" element={<Header/>} />
+          <Route path="/login" element={<><Header /> <LogPage /></>} />
         
       </Routes>
     </main>

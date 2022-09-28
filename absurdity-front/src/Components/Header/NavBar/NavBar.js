@@ -1,9 +1,10 @@
 import { Menu } from 'semantic-ui-react';
 import { Dropdown } from 'semantic-ui-react';
 import { NavLink } from 'react-router-dom';
+import authHeader from '../../../Middlewares/AuthHeader';
 
 function NavBar() {
-
+    
     function logOut() {
         localStorage.removeItem("user");
     };
@@ -11,12 +12,13 @@ function NavBar() {
     return (
         <nav className="NavBar">
             <Menu borderless>
-                <Menu.Item 
+                {authHeader() ? <Menu.Item 
                     as={NavLink} to="/"
                     icon="sign-out" 
                     onClick={ () => logOut() }
                     >
-                </Menu.Item>
+                </Menu.Item> 
+                : ''}
                 <Menu.Item 
                     icon="user"
                     as={NavLink} to="/login"

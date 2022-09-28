@@ -2,11 +2,13 @@ import { useRef, useState, useEffect } from 'react';
 import './LogFormLogIn.scss';
 import axios from 'axios';
 import authHeader from '../../../Middlewares/AuthHeader';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 
 const LogFormLogIn = () => {
     const userRef = useRef();
     const errRef = useRef();
     const baseURL = process.env.REACT_APP_API_URL;
+    const navigate = useNavigate();
 
     const [user, setUser] = useState('');
     const [pwd, setPwd] = useState('');
@@ -48,6 +50,7 @@ const LogFormLogIn = () => {
             setUser('');
             setPwd('');
             setSuccess(true);
+            navigate("/");
         } catch (err) {
             if (!err.response) {
                 setErrMsg("Pas de réponse du serveur");
@@ -97,7 +100,9 @@ const LogFormLogIn = () => {
                             value={pwd}
                             required
                         />
-                        <button>Se connecter</button>
+                        <button>
+                            Se connecter
+                        </button>
                     </form>
                     <p>
                         Pas encore inscrit.e ?<br />
