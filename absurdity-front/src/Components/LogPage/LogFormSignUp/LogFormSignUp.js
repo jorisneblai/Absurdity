@@ -1,7 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import './LogFormSignUp.scss';
 import axios from 'axios';
-import authHeader from "../../../Middlewares/AuthHeader";
 
 function LogFormSignUp(  ) {
     const userRef = useRef();

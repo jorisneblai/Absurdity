@@ -1,12 +1,13 @@
 import { Menu } from 'semantic-ui-react';
 import { Dropdown } from 'semantic-ui-react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import authHeader from '../../../Middlewares/AuthHeader';
 
 function NavBar() {
-    
+    const navigate = useNavigate();
     function logOut() {
         localStorage.removeItem("user");
+        navigate('/');
     };
 
     return (
