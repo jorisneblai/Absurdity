@@ -1,10 +1,12 @@
 import { useRef, useState, useEffect } from "react";
 import './LogFormSignUp.scss';
 import axios from 'axios';
+import authHeader from "../../../Middlewares/AuthHeader";
 
 function LogFormSignUp(  ) {
     const userRef = useRef();
     const errRef = useRef();
+    const baseURL = process.env.REACT_APP_API_URL;
 
     const [user, setUser] = useState('');
     const [validName, setValidName] = useState(false);
@@ -40,7 +42,7 @@ function LogFormSignUp(  ) {
         const password = pwd; 
         const email = 'test3@test.com'
         try {
-            const response = await axios.post("http://nicolas-defranould.vpnuser.lan:3000/sign-up",
+            const response = await axios.post(`${baseURL}sign-up`,
                 JSON.stringify({ pseudo, password, email }),
                 {
                     headers: { 'Content-Type': 'application/json' },

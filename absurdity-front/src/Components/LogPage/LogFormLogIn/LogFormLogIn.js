@@ -1,11 +1,12 @@
 import { useRef, useState, useEffect } from 'react';
 import './LogFormLogIn.scss';
 import axios from 'axios';
+import authHeader from '../../../Middlewares/AuthHeader';
 
 const LogFormLogIn = () => {
     const userRef = useRef();
     const errRef = useRef();
-    const baseURL = process.env.API_URL;
+    const baseURL = process.env.REACT_APP_API_URL;
 
     const [user, setUser] = useState('');
     const [pwd, setPwd] = useState('');
@@ -14,6 +15,7 @@ const LogFormLogIn = () => {
     const [role, setRole] = useState('');
 
     useEffect(() => {
+        setSuccess(authHeader())
         userRef.current.focus();
     }, [])
 
@@ -21,11 +23,11 @@ const LogFormLogIn = () => {
         setErrMsg('');
     }, [user, pwd])
 
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const pseudo = user;
         const password = pwd;
-        console.log(password);
         if(!pseudo || !password) {
             setErrMsg("Nom d'utilisateur.trice ou mot de passe manquant");
         } else {
@@ -36,12 +38,16 @@ const LogFormLogIn = () => {
                     headers: { 'Content-Type': 'application/json' },
                 }
             );
+            /* if with got a response stocking an access token, we put it in the Local Storage */
             console.log(JSON.stringify(response.data));
+            if (response.data) {
+                localStorage.setItem("user", JSON.stringify(response.data));
+              }
+              console.log(localStorage.getItem("user"));
             setRole(response.data.roles);
             setUser('');
             setPwd('');
             setSuccess(true);
-            console.log("role:", response.data.role);
         } catch (err) {
             if (!err.response) {
                 setErrMsg("Pas de réponse du serveur");
