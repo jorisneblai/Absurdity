@@ -1,28 +1,3 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    font-family: 'Nunito', sans-serif;
-    font-size: 22px;
-    color: #fff;
-}
-
-body {
-    min-height: 100vh;
-    background-color: dodgerblue;
-}
-
-.App {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh; 
-  padding: 1rem 0.5rem;
-}
 .LogFormSignUp {
     font-size: 22px;
     color: #fff;
@@ -52,6 +27,7 @@ a, a:visited {
 
 input[type="text"],
 input[type="password"],
+input[type="email"],
 button,
 textarea {
   font-family: 'Nunito', sans-serif;

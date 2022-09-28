@@ -8,6 +8,10 @@ function LogFormSignUp(  ) {
     const errRef = useRef();
     const baseURL = process.env.REACT_APP_API_URL;
 
+    const [email, setEmail] = useState('');
+    const [validEmail, setValidEmail] = useState(false);
+    const [emailFocus, setEmailFocus] = useState(false);
+
     const [user, setUser] = useState('');
     const [validName, setValidName] = useState(false);
     const [userFocus, setUserFocus] = useState(false);
@@ -40,7 +44,6 @@ function LogFormSignUp(  ) {
         e.preventDefault();
         const pseudo = user;
         const password = pwd; 
-        const email = 'test3@test.com'
         try {
             const response = await axios.post(`${baseURL}sign-up`,
                 JSON.stringify({ pseudo, password, email }),
@@ -81,13 +84,26 @@ function LogFormSignUp(  ) {
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
                     <h1>S'inscrire</h1>
                     <form onSubmit={handleSubmit}>
+                    <label htmlFor="username">
+                            E-Mail :
+                        </label>
+                        <input
+                            type="email"
+                            id="email"
+                            ref={userRef}
+                            autoComplete="off"
+                            onChange={(event) => setEmail(event.target.value)}
+                            value={email}
+                            required
+                            onFocus={() => setEmailFocus(true)}
+                            onBlur={() => setEmailFocus(false)}
+                        />
                         <label htmlFor="username">
                             Pseudo :
                         </label>
                         <input
                             type="text"
                             id="username"
-                            ref={userRef}
                             autoComplete="off"
                             onChange={(event) => setUser(event.target.value)}
                             value={user}
