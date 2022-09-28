@@ -5,6 +5,7 @@ import axios from 'axios';
 const LogFormLogIn = () => {
     const userRef = useRef();
     const errRef = useRef();
+    const baseURL = process.env.API_URL;
 
     const [user, setUser] = useState('');
     const [pwd, setPwd] = useState('');
@@ -29,7 +30,7 @@ const LogFormLogIn = () => {
             setErrMsg("Nom d'utilisateur.trice ou mot de passe manquant");
         } else {
         try {
-            const response = await axios.post("http://nicolas-defranould.vpnuser.lan:3000/login",
+            const response = await axios.post(`${baseURL}login`,
                 JSON.stringify({ pseudo, password }),
                 {
                     headers: { 'Content-Type': 'application/json' },

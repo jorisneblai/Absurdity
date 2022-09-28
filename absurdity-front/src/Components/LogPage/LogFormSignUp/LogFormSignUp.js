@@ -1,7 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import './LogFormSignUp.scss';
 import axios from 'axios';
-import { Icon } from 'semantic-ui-react';
 
 function LogFormSignUp(  ) {
     const userRef = useRef();
