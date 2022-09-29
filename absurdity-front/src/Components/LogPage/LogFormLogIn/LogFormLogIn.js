@@ -104,13 +104,6 @@ const LogFormLogIn = () => {
                             Se connecter
                         </button>
                     </form>
-                    <p>
-                        Pas encore inscrit.e ?<br />
-                        <span className="line">
-                            {/*put router link here*/}
-                            <a href="#">S'inscrire</a>
-                        </span>
-                    </p>
                 </section>
             )}
         </div>

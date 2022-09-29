@@ -1,3 +1,9 @@
 .ui.menu .item>img:not(.ui) {
     width:8rem;
+
 }
+
+    .ui.menu .active.item {
+        background-color: white;
+    }
+

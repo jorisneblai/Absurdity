@@ -156,13 +156,6 @@ function LogFormSignUp(  ) {
 
                         <button>S'inscrire</button>
                     </form>
-                    <p>
-                        Déjà inscrit.e ?<br />
-                        <span className="line">
-                            {/*put router link here*/}
-                            <a href="#">Se connecter</a>
-                        </span>
-                    </p>
                 </section>
             )}
         
