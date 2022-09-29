@@ -1,0 +1,26 @@
+.Profil {
+    display: flex;
+    flex-direction: column;
+    margin: 10rem 50rem;
+    text-align: center;
+}
+
+.ui.labeled.input:not([class*="corner labeled"]) .label:first-child {
+    width: 10rem;
+    padding: 20px;
+    font-size: 1.2rem;
+}
+
+.Pseudo-label {
+    padding: 20px;
+    font-size: 1.2rem;
+}
+
+.Pseudo-input {
+    margin: 0 0 1.5rem 0;
+}
+
+.Pwd-label {
+    padding: 20px;
+    font-size: 1.2rem;
+}
