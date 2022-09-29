@@ -1,4 +1,5 @@
 import './App.scss';
+import Home from '../Components/Home/Home';
 import LogPage from '../Components/LogPage/LogPage';
 import Header from '../Components/Header/Header';
 import About from '../Components/About/About';
@@ -14,7 +15,7 @@ function App() {
   return (
     <main className="App">
         <Routes>
-          <Route path="/" element={<><Header/></>} />
+          <Route path="/" element={<><Header/> <Home /></>} />
           <Route path="/login" element={<><Header /> <LogPage /></>} />
           <Route path="/about" element={<><Header />  <About/></>} />
           <Route path="/cgu" element={<><Header />  <Terms/></>} />

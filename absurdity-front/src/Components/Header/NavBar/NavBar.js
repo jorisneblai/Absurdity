@@ -20,11 +20,17 @@ function NavBar() {
                     >
                 </Menu.Item> 
                 : ''}
+                {authHeader() ? <Menu.Item 
+                    icon="user"
+                    as={NavLink} to="/profil"
+                >
+                </Menu.Item>
+                :
                 <Menu.Item 
                     icon="user"
                     as={NavLink} to="/login"
                 >
-                </Menu.Item>
+                </Menu.Item>}
                 <Dropdown icon="bars" item direction="left">
                     <Dropdown.Menu>
                         <Dropdown.Item as={NavLink} to="/">Accueil</Dropdown.Item>
