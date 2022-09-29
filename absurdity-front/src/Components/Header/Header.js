@@ -1,6 +1,9 @@
+import './Header.scss';
+
 import Logo from '../../assets/img/Absurdity_logo.svg';
 import { Menu } from 'semantic-ui-react';
 import NavBar from './NavBar/NavBar';
+
 
 function Header() {
     return (
