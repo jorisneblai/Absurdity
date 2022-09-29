@@ -48,7 +48,6 @@ function LogFormSignUp(  ) {
                 JSON.stringify({ pseudo, password, email }),
                 {
                     headers: { 'Content-Type': 'application/json' },
-
                 }
             );
             console.log(response.data);
