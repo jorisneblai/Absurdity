@@ -27,8 +27,9 @@ function NavBar() {
                 </Menu.Item>
                 <Dropdown icon="bars" item direction="left">
                     <Dropdown.Menu>
-                        <Dropdown.Item>Accueil</Dropdown.Item>
-                        <Dropdown.Item>Faq</Dropdown.Item>
+                        <Dropdown.Item as={NavLink} to="/">Accueil</Dropdown.Item>
+                        <Dropdown.Item as={NavLink} to="/about">À propos</Dropdown.Item>
+                        <Dropdown.Item as={NavLink} to="/cgu">CGU</Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>
             </Menu>
