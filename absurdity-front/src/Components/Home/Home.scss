@@ -1,0 +1,38 @@
+.Home {
+    max-width: 40%;
+    margin: 0 auto;
+    text-align: center;
+}
+@media screen and (max-width: 900px){
+    .Home {
+        max-width: 90%;
+    }
+}
+
+.Home-title,
+.Home-top_question,
+.Home-questions {
+    margin-bottom: 2rem;
+}
+
+.Home-questions {
+    position: relative;
+    text-align: left;
+
+}
+
+.Home-questions_title {
+    margin: 0 auto;
+}
+
+.Home-questions_button {
+    position: absolute;
+    bottom: 4px;
+    right: 0px;
+}
+
+// .Home-questions_label,
+// .Home-questions_answer {
+//     text-align: left;
+// }
+
