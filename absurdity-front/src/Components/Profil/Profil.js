@@ -22,10 +22,14 @@ function Profil() {
     }, []);
 
     function truc() {
-        console.log(data)
+        console.log(data.data.pseudo)
     }
 
-
+if(!data) {
+    return (
+        <div className="App">Loading...</div>
+    )
+} else {
     return (  
         <main className="Profil">
         <button onClick={() => { truc() }}>truc</button>
@@ -34,7 +38,7 @@ function Profil() {
             </h1>
             <form className="Profil-inputs">
                 <Input className="Pseudo-input" labelPosition='right' type='text' placeholder='Changer de pseudo...'>
-                    <Label className='Pseudo-label'>Pseudo</Label>
+                    <Label className='Pseudo-label'>{data ? data.data.pseudo : 'nope'}</Label>
                     <input />
                     <Label icon='pencil alternate'></Label>
                 </Input>
@@ -45,7 +49,7 @@ function Profil() {
                 </Input>
             </form>
         </main>
-    );
+    );}
 }
 
 export default Profil;
