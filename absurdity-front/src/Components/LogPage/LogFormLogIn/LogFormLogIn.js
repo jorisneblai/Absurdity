@@ -15,9 +15,8 @@ const LogFormLogIn = () => {
     const [pwd, setPwd] = useState('');
     const [errMsg, setErrMsg] = useState('');
     const [success, setSuccess] = useState(false);
-    const [role, setRole] = useState('');
-    const [data, setData] = useState(null);
 
+    /* This useEffect have a navigate dependency so it can use useNavigate Hook */
     useEffect(() => {
             const f = async () => {
                 const newData = await authHeader('checkuser');
@@ -31,7 +30,7 @@ const LogFormLogIn = () => {
             f();
 
         userRef.current.focus();
-    }, []);
+    }, [navigate]);
 
     useEffect(() => {
         setErrMsg('');
@@ -56,7 +55,6 @@ const LogFormLogIn = () => {
                 if (response.data) {
                     localStorage.setItem("user", JSON.stringify(response.data.data.token));
                 }
-                setRole(response.data.roles);
                 setUser('');
                 setPwd('');
                 setSuccess(true);
@@ -81,10 +79,6 @@ const LogFormLogIn = () => {
             {success ? (
                 <section>
                     <h1>Vous êtes connecté.e !</h1>
-                    <br />
-                    <p>
-                        <a href="#">Retour à l'Accueil</a>
-                    </p>
                 </section>
             ) : (
                 <section>

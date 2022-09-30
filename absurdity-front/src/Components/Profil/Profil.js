@@ -19,7 +19,7 @@ function Profil() {
             }
         }
         f();
-    }, []);
+    }, [navigate]);
 
     function truc() {
         console.log(data.data.pseudo)
