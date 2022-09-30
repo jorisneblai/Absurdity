@@ -2,7 +2,7 @@ import { useRef, useState, useEffect } from 'react';
 import './LogFormLogIn.scss';
 import axios from 'axios';
 import authHeader from '../../../Middlewares/AuthHeader';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 const LogFormLogIn = () => {
     const userRef = useRef();
@@ -10,16 +10,28 @@ const LogFormLogIn = () => {
     const baseURL = process.env.REACT_APP_API_URL;
     const navigate = useNavigate();
 
+
     const [user, setUser] = useState('');
     const [pwd, setPwd] = useState('');
     const [errMsg, setErrMsg] = useState('');
     const [success, setSuccess] = useState(false);
     const [role, setRole] = useState('');
+    const [data, setData] = useState(null);
 
     useEffect(() => {
-        setSuccess(authHeader())
+            const f = async () => {
+                const newData = await authHeader('checkuser');
+                if (!newData) {
+                    setSuccess(false)
+                } else {
+                    setSuccess(newData);
+                    navigate('/')
+                }
+            }
+            f();
+
         userRef.current.focus();
-    }, [])
+    }, []);
 
     useEffect(() => {
         setErrMsg('');
@@ -30,40 +42,38 @@ const LogFormLogIn = () => {
         e.preventDefault();
         const pseudo = user;
         const password = pwd;
-        if(!pseudo || !password) {
+        if (!pseudo || !password) {
             setErrMsg("Nom d'utilisateur.trice ou mot de passe manquant");
         } else {
-        try {
-            const response = await axios.post(`${baseURL}login`,
-                JSON.stringify({ pseudo, password }),
-                {
-                    headers: { 'Content-Type': 'application/json' },
+            try {
+                const response = await axios.post(`${baseURL}login`,
+                    JSON.stringify({ pseudo, password }),
+                    {
+                        headers: { 'Content-Type': 'application/json' },
+                    }
+                );
+                /* if with got a response stocking an access token, we put it in the Local Storage */
+                if (response.data) {
+                    localStorage.setItem("user", JSON.stringify(response.data.data.token));
                 }
-            );
-            /* if with got a response stocking an access token, we put it in the Local Storage */
-            console.log(JSON.stringify(response.data));
-            if (response.data) {
-                localStorage.setItem("user", JSON.stringify(response.data));
-              }
-              console.log(localStorage.getItem("user"));
-            setRole(response.data.roles);
-            setUser('');
-            setPwd('');
-            setSuccess(true);
-            navigate("/");
-        } catch (err) {
-            if (!err.response) {
-                setErrMsg("Pas de réponse du serveur");
-            } else if (err.response.status === 400) {
-                setErrMsg("Nom d'utilisateur.trice ou mot de passe manquant");
-            } else if (err.response.status === 401) {
-                setErrMsg("Non autorisé.e, Pseudo, Email ou Mot de passe incorrect.");
-            } else {
-                setErrMsg("Échec de la connexion");
+                setRole(response.data.roles);
+                setUser('');
+                setPwd('');
+                setSuccess(true);
+                navigate('/')
+            } catch (err) {
+                if (!err.response) {
+                    setErrMsg("Pas de réponse du serveur");
+                } else if (err.response.status === 400) {
+                    setErrMsg("Nom d'utilisateur.trice ou mot de passe manquant");
+                } else if (err.response.status === 401) {
+                    setErrMsg("Non autorisé.e, Pseudo, Email ou Mot de passe incorrect.");
+                } else {
+                    setErrMsg("Échec de la connexion");
+                }
+                errRef.current.focus();
             }
-            errRef.current.focus();
         }
-    }
     }
 
     return (

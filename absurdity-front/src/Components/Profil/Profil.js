@@ -1,9 +1,34 @@
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import authHeader from '../../Middlewares/AuthHeader';
 import { Input, Label } from 'semantic-ui-react';
 import './Profil.scss';
 
 function Profil() {
+
+    const navigate = useNavigate();
+    const [data, setData] = useState(null);
+
+    useEffect(() => {
+        const f = async () => {
+            const newData = await authHeader('user');
+            if (!newData) {
+                navigate('/');
+            } else {
+                setData(newData);
+            }
+        }
+        f();
+    }, []);
+
+    function truc() {
+        console.log(data)
+    }
+
+
     return (  
         <main className="Profil">
+        <button onClick={() => { truc() }}>truc</button>
             <h1 className="Profil-title">
                 Profil de
             </h1>

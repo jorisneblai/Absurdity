@@ -1,11 +1,14 @@
 import { useRef, useState, useEffect } from "react";
 import './LogFormSignUp.scss';
 import axios from 'axios';
+import authHeader from '../../../Middlewares/AuthHeader';
+import { useNavigate } from 'react-router';
 
 function LogFormSignUp(  ) {
     const userRef = useRef();
     const errRef = useRef();
     const baseURL = process.env.REACT_APP_API_URL;
+    const navigate = useNavigate()
 
     const [email, setEmail] = useState('');
     const [validEmail, setValidEmail] = useState(false);
@@ -27,8 +30,19 @@ function LogFormSignUp(  ) {
     const [success, setSuccess] = useState(false);
 
     useEffect(() => {
-        userRef.current.focus();
-    }, [])
+        const f = async () => {
+            const newData = await authHeader('checkuser');
+            if (!newData) {
+                setSuccess(false)
+            } else {
+                setSuccess(newData);
+                navigate('/')
+            }
+        }
+        f();
+
+    userRef.current.focus();
+}, []);
 
 
     useEffect(() => {

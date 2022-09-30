@@ -7,7 +7,7 @@ function Home() {
             <Header className="Home-title" as="h1">
                 Absurdity, des vannes à toutes heures. L'absurdité dans toute sa Chandeleur.
             </Header>
-            <Segment class="Home-top_question">
+            <Segment className="Home-top_question">
                 <Header className="Home-top_question-title" as="h2">
                     Question du jour :
                 </Header>

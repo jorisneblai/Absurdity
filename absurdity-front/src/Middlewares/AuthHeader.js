@@ -2,7 +2,8 @@ import axios from 'axios';
 
  async function authHeader(route){
 
-  const token = localStorage.getItem('user');
+  const token = localStorage.getItem('user') || null;
+  if(token === null) {return false}
   const baseURL = process.env.REACT_APP_API_URL;
 
    const data = await axios.post(`${baseURL}${route}`,
@@ -18,11 +19,12 @@ import axios from 'axios';
       return false;
     }
   }).catch((error) => {
-    console.log(error);
+    console.log(error)
     return false;
   })
   return data;
 }
+
 
 export default authHeader;
 
