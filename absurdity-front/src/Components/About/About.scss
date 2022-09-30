@@ -8,3 +8,19 @@
     align-content: space-evenly;
 }
 
+.ui .card {
+    margin: 1rem 0;
+}
+
+@media only screen and (min-width: 1200px){
+    .ui.container {
+        width: 1127px;
+        margin-left: auto!important;
+        margin-right: auto!important;
+        display: flex;
+        flex-wrap: wrap;
+        flex-grow: 1;
+        justify-content: space-between;
+    }
+}
+        
