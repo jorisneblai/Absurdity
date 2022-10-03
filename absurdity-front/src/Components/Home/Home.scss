@@ -31,6 +31,16 @@
     right: 0px;
 }
 
+.Home-form {
+    max-width: 60%;
+    margin: 0 auto;
+}
+
+#root > main > main > div.ui.segment.Home-top_question > div > a {
+    color: darkred;
+    text-decoration: underline;
+}
+
 // .Home-questions_label,
 // .Home-questions_answer {
 //     text-align: left;

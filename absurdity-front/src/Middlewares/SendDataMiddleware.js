@@ -1,7 +1,7 @@
 import axios from 'axios';
 
  async function sendDataMiddleware(route, answer){
-   
+
   const token = localStorage.getItem('user') || null;
   const content = answer;
   if(token === null) {return false}

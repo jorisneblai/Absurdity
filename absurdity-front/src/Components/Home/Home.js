@@ -1,5 +1,6 @@
-import { Input, Segment, Header, Button, Icon, Divider, Label } from 'semantic-ui-react';
+import { Input, Segment, Header, Button, Icon, Divider, Label, Message } from 'semantic-ui-react';
 import './Home.scss';
+import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import getData from '../../Middlewares/GetDataMiddleware';
 import authHeader from '../../Middlewares/AuthHeader';
@@ -9,7 +10,7 @@ function Home() {
     const [data, setData] = useState(null);
     const [connected, setConnected] = useState(false);
     const [ value, setValue ] = useState('')
-    const [answered, setAnswered] = useState(false);
+    const [answered, setAnswered] = useState(null);
     /*
     topQuestion is a state use to get the id of the question of the day, it will start with a useEffect request to get it with getData middleware on a specific road, then the other request will have access to the good top question
 
@@ -48,6 +49,7 @@ function Home() {
             } else {
                 console.log("Answer delivered")
                 setAnswered(true);
+                setValue('');
             }
         }
         trySendAnswer()
@@ -65,10 +67,38 @@ function Home() {
                 <p className="Home-top_question-para">
                     {!data ? "Loading..." : data.data.content}
                 </p>
-                <form onSubmit={(event) => {
+                {answered===true ? 
+                    <Message positive>
+                      <Message.Header>Votre réponse a bien été envoyée!</Message.Header>
+                      <p>
+                        On sait pas où, mais...elle a été envoyée...
+                      </p>
+                    </Message> 
+                    : ''
+                }
+                {answered===false && connected ? 
+                    <Message negative >
+                    <Message.Header>C'était presque ça !</Message.Header>
+                    <p>mais, c'est pas ça.</p>
+                    </Message>
+                    : ''
+                }
+                {answered===false && !connected ? 
+                    <Message negative >
+                    <Message.Header>Hop, hop, hop, papier du véhicule</Message.Header>
+                    <p>(ou un pot de vin)</p>
+                    <Link className='Link-Login' to='login'>Ici pour faire la carte grise</Link>
+                    </Message>
+                    : ''
+                }
+                {answered===null ? 
+                  <form
+                  className="Home-form" 
+                  onSubmit={(event) => {
                     event.preventDefault();
                     sendAnswer();
                 }}>
+
                     <Input
                         action={{ icon: "arrow alternate circle right" }}
                         placeholder='Écrivez votre réponse...'
@@ -77,8 +107,12 @@ function Home() {
                         onChange={(event) => {
                             setValue(event.target.value);
                         }}
+                        fluid
                     />
                 </form>
+                : ''
+                }
+              
                 <Button icon circular className="Home-questions_button">
                     <Icon name="ellipsis horizontal" />
                 </Button>
