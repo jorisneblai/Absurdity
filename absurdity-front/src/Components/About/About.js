@@ -1,7 +1,10 @@
 import { Container, Header } from 'semantic-ui-react';
 import AboutProfil from './AboutProfil/AboutProfil';
 import './About.scss';
-import img from '../../assets/img/juice.png';
+import joris from '../../assets/img/juice.png';
+import nabiha from '../../assets/img/profil-nabiha.jpg';
+import thibault from '../../assets/img/profil-thibault.png';
+
 
 function About() {
     return (
@@ -22,11 +25,11 @@ function About() {
             </Container>
 
             <Container className="Trombi">
-            <AboutProfil image={img} name='Moi' role='Master of the Universe' description ='Lorem Ispum dolor sit amet'/>
-            <AboutProfil image={img} name='Moi' role='Master of the Universe' description ='Lorem Ispum dolor sit amet'/>
-            <AboutProfil image={img} name='Moi' role='Master of the Universe' description ='Lorem Ispum dolor sit amet'/>
-            <AboutProfil image={img} name='Moi' role='Master of the Universe' description ='Lorem Ispum dolor sit amet'/>
-            <AboutProfil image={img} name='Moi' role='Master of the Universe' description ='Lorem Ispum dolor sit amet'/>
+            <AboutProfil image={joris} name='Joris' role='Lead Dev Front' description ='The dark side of the front'/>
+            <AboutProfil image={nabiha} name='Nabiha' role='Référente technologies' description ='Nabiha ne fait pas le moine'/>
+            <AboutProfil image={joris} name='Nicolas' role='Lead Dev Back' description ='Lorem Ispum dolor sit amet'/>
+            <AboutProfil image={joris} name='Romain' role='Scrum Master et Git Master' description ='Lorem Ispum dolor sit amet'/>
+            <AboutProfil image={thibault} name='Thibault' role='Product Owner' description ="Un jour j'irai vivre en théorie parce qu'en théorie tout se passe bien"/>
             </Container>
         </main>
     )
