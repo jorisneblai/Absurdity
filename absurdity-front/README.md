@@ -90,3 +90,44 @@ return (
     <div>{data.title}</div>
 )
 ```
+
+/This is the route for create new Account/
+router.post('/sign-up',handlerController(usersController.signup));
+/This is the route for the validation of connexion/
+router.post('/login',handlerController(usersController.login));
+
+/Connected/
+/This is the route for Find user By Id/
+router.post('/user',tokenAuth.checkUser,handlerController(usersController.getOneByPk));
+/This is the route for verify token for front/
+router.post('/checkuser',tokenAuth.checkUser);
+/This is the route for update the account of the user/
+router.patch('/user',tokenAuth.checkUser,handlerController(usersController.update));
+/This is the route for delete the account of the user/
+router.delete('/user',tokenAuth.checkUser,handlerController(usersController.delete));
+
+/Admin/
+/This is the route for watch all users/
+router.post('/users',tokenAuth.checkUser, handlerController(usersController.getAll));
+
+/Not connected/
+/This the road get all questions and answers/ 
+router.get('/questions', handlerController(questionsController.getAllQuestions));
+/This the road get only question/ 
+router.get('/question/:questionId',handlerController(questionsController.getQuestionById));
+/This the road for get one question with the answers/
+router.get('/question/:questionId/answers', handlerController(questionsController.getQuestionByIdAnswers));
+
+/Connected/
+/This the road for create one answer in the question/
+router.post('/question/:questionId/answer',tokenAuth.checkUser,handlerController(questionsController.getQuestionByIdAndCreateAnswer));
+
+/Admin/
+/This the road for update one question/ 
+router.patch('/question/:questionId',tokenAuth.checkUser,handlerController(questionsController.updateQuestion));
+/This the road for delete one question/ 
+router.delete('/question/:questionId',tokenAuth.checkUser,handlerController(questionsController.deleteQuestion));
+/This the road for create question/ 
+router.post('/questions',tokenAuth.checkUser,handlerController(questionsController.createQuestion));
+
+"token": "\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzAsInBzZXVkbyI6Im5pY29sYXNzIiwiZW1haWwiOiJybmljb2xhc0BuaWNvbGFzLmNvbSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjY0NDg1MzE3LCJleHAiOjE2NjQ3NDQ1MTd9.hq_mQa8LZFL_wDISflmfYOnswV8AHufMvB-nrqS6-g4\""

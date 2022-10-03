@@ -1,4 +1,4 @@
-import { Container, Header, Card, Image } from 'semantic-ui-react';
+import { Container, Header } from 'semantic-ui-react';
 import AboutProfil from './AboutProfil/AboutProfil';
 import './About.scss';
 import img from '../../assets/img/juice.png';

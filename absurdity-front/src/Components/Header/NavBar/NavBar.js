@@ -14,7 +14,7 @@ function NavBar() {
             if (!newData) {
                 return
             } else {
-                console.log("rendu fait et connecté")
+                return
             }
         }
         f();
