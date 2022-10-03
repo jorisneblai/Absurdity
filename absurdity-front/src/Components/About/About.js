@@ -1,4 +1,5 @@
-import { Container, Header, Card, Image, Icon } from 'semantic-ui-react';
+import { Container, Header, Card, Image } from 'semantic-ui-react';
+import AboutProfil from './AboutProfil/AboutProfil';
 import './About.scss';
 import img from '../../assets/img/juice.png';
 
@@ -21,66 +22,11 @@ function About() {
             </Container>
 
             <Container className="Trombi">
-                <Card>
-                    <Image src={img} wrapped ui={false} />
-                    <Card.Content>
-                        <Card.Header>Joris</Card.Header>
-                        <Card.Meta>
-                            <span className='date'>LEAD DEV FRONT</span>
-                        </Card.Meta>
-                        <Card.Description>
-                            Joris, existant sur la 3ème planête du système dit « solaire ».
-                        </Card.Description>
-                    </Card.Content>
-                </Card>
-                <Card>
-                    <Image src={img} wrapped ui={false} />
-                    <Card.Content>
-                        <Card.Header>Joris</Card.Header>
-                        <Card.Meta>
-                            <span className='date'>LEAD DEV FRONT</span>
-                        </Card.Meta>
-                        <Card.Description>
-                            Joris, existant sur la 3ème planête du système dit « solaire ».
-                        </Card.Description>
-                    </Card.Content>
-                </Card>
-                <Card>
-                    <Image src={img} wrapped ui={false} />
-                    <Card.Content>
-                        <Card.Header>Joris</Card.Header>
-                        <Card.Meta>
-                            <span className='date'>LEAD DEV FRONT</span>
-                        </Card.Meta>
-                        <Card.Description>
-                            Joris, existant sur la 3ème planête du système dit « solaire ».
-                        </Card.Description>
-                    </Card.Content>
-                </Card>
-                <Card>
-                    <Image src={img} wrapped ui={false} />
-                    <Card.Content>
-                        <Card.Header>Joris</Card.Header>
-                        <Card.Meta>
-                            <span className='date'>LEAD DEV FRONT</span>
-                        </Card.Meta>
-                        <Card.Description>
-                            Joris, existant sur la 3ème planête du système dit « solaire ».
-                        </Card.Description>
-                    </Card.Content>
-                </Card>
-                <Card>
-                    <Image src={img} wrapped ui={false} />
-                    <Card.Content>
-                        <Card.Header>Joris</Card.Header>
-                        <Card.Meta>
-                            <span className='date'>LEAD DEV FRONT</span>
-                        </Card.Meta>
-                        <Card.Description>
-                            Joris, existant sur la 3ème planête du système dit « solaire ».
-                        </Card.Description>
-                    </Card.Content>
-                </Card>
+            <AboutProfil image={img} name='Moi' role='Master of the Universe' description ='Lorem Ispum dolor sit amet'/>
+            <AboutProfil image={img} name='Moi' role='Master of the Universe' description ='Lorem Ispum dolor sit amet'/>
+            <AboutProfil image={img} name='Moi' role='Master of the Universe' description ='Lorem Ispum dolor sit amet'/>
+            <AboutProfil image={img} name='Moi' role='Master of the Universe' description ='Lorem Ispum dolor sit amet'/>
+            <AboutProfil image={img} name='Moi' role='Master of the Universe' description ='Lorem Ispum dolor sit amet'/>
             </Container>
         </main>
     )

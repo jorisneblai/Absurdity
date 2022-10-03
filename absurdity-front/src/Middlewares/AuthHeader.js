@@ -27,35 +27,3 @@ import axios from 'axios';
 
 
 export default authHeader;
-
-/*import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import authHeader from '../../Middlewares/AuthHeader';
-
-function Profil() {
-    const navigate = useNavigate();
-    const [data, setData] = useState(null);
-
-    useEffect(() => {
-        const f = async () => {
-            const newData = await authHeader('user');
-            if (!newData) {
-                navigate('/');
-            } else {
-                setData(newData);
-            }
-        }
-        f();
-    }, []);
-
-    function truc() {
-        console.log(data)
-    }
-
-
-    return (
-        <><button onClick={() => { truc() }}>truc</button></>
-    );
-}
-
-export default Profil;*/

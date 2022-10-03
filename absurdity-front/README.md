@@ -68,3 +68,25 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+### Use middleware to fetch data in React components
+
+``` js
+const [ data, setData ] = useState(null);
+
+useEffect(() => {
+            const f = async () => {
+                const newData = await authHeader(expected path);
+                if (!newData) {
+                    setData(null)
+                } else {
+                    setData(newData);
+                }
+            }
+            f();
+    }, []);
+
+return (
+    <div>{data.title}</div>
+)
+```

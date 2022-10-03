@@ -2,21 +2,19 @@ import { Menu } from 'semantic-ui-react';
 import { Dropdown } from 'semantic-ui-react';
 import { NavLink } from 'react-router-dom';
 import authHeader from '../../../Middlewares/AuthHeader';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import isLoggedMiddleware from '../../../Middlewares/isLoggedMiddleware';
 
 function NavBar() {
-    const [success, setSuccess] = useState(false)
+
 
     useEffect(() => {
         const f = async () => {
             const newData = await authHeader('checkuser');
             if (!newData) {
-                setSuccess(false);
-                console.log("utilisateur non connecté")
+                return
             } else {
                 console.log("rendu fait et connecté")
-                setSuccess(newData);
             }
         }
         f();
