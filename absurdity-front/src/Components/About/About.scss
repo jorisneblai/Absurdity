@@ -5,6 +5,27 @@
     align-items: center;
     justify-content: center;
     align-content: space-evenly;
+ p {
+     font-size: large;
+ }
+}
+.container.About-bio > h1 {
+    font-size: xxx-large;
+    font-family: 'Courier New', Courier, monospace;
+    text-transform:uppercase;
+}
+
+.ui.container.Trombi{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    .card {
+        max-width: 200px;
+    }
+}
+.ui.card:first-child {
+    display: none;
 }
 
 .ui .card {
@@ -13,13 +34,9 @@
 
 @media only screen and (min-width: 1200px){
     .ui.container {
-        width: 1127px;
         margin-left: auto!important;
         margin-right: auto!important;
-        display: flex;
-        flex-wrap: wrap;
-        flex-grow: 1;
-        justify-content: space-between;
+
     }
 }
         

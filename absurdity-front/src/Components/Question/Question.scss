@@ -1,0 +1,10 @@
+div.ui.segment.Questions {
+    max-width: 40%;
+    margin: 0 auto;
+}
+@media screen and (max-width: 900px){
+    div.ui.segment.Questions {
+        max-width: 90%;
+    }
+}
+
