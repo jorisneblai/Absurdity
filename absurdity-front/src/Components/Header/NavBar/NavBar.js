@@ -1,13 +1,12 @@
 import './NavBar.scss';
-import { Menu } from 'semantic-ui-react';
-import { Dropdown } from 'semantic-ui-react';
+import { Menu, Dropdown, Transition } from 'semantic-ui-react';
 import { NavLink } from 'react-router-dom';
 import authHeader from '../../../Middlewares/AuthHeader';
 import { useEffect } from 'react';
 import isLoggedMiddleware from '../../../Middlewares/isLoggedMiddleware';
 
-function NavBar() {
 
+function NavBar() {
 
     useEffect(() => {
         const f = async () => {
