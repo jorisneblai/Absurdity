@@ -129,12 +129,12 @@ function Home() {
                 </Button>
             </Segment>
 
-            {questionsList ? (
+            {questionsList? (
                 <ul>
                     {questionsList.data.map((value) => {
                         return (
-                        <li key={value.questions}>
-                        <PreviousQuestion user='tutu' questionTitle={value.questions} userAnswer='Oui' path='/about'/>
+                        <li key={value.question_id}>
+                        <PreviousQuestion user={value.list_answers[0].pseudo} questionTitle={value.question} userAnswer={value.list_answers[0].answer} path={`/question/${value.question_id}`} />
                         </li>)
                     })}
                 </ul>

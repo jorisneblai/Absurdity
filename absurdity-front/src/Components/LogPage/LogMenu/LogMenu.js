@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Menu } from 'semantic-ui-react';
 
 function LogMenu( props ) {
-  const [activeItem, setActiveItem] = useState('Inscription');
+  const [activeItem, setActiveItem] = useState('Connexion');
 
   const handleItemClick = (e, { name }) => {
     setActiveItem(name);
@@ -16,7 +16,7 @@ function LogMenu( props ) {
             active={activeItem === 'Inscription'}
             onClick={handleItemClick}
           />
-          <Menu.Item
+                  <Menu.Item
             name='Connexion'
             active={activeItem === 'Connexion'}
             onClick={handleItemClick}

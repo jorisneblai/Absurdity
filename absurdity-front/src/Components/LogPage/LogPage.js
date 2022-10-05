@@ -5,7 +5,7 @@ import { useState } from "react";
 import './LogPage.scss';
 
 function LogPage(chosenPage) {
-  const [logMenu, setLogMenu] = useState('Inscription');
+  const [logMenu, setLogMenu] = useState('Connexion');
 
   const pull_data = (data) => {
     setLogMenu(data);
@@ -16,6 +16,7 @@ function LogPage(chosenPage) {
       <LogMenu func={pull_data}/>
       {logMenu === 'Inscription' ? <LogFormSignUp/> : ''}
       {logMenu === 'Connexion' ? <LogFormLogIn/> : ''}
+      
       
     </section>
   );
