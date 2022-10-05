@@ -16,8 +16,10 @@ import axios from 'axios';
     }
   ).then((response) => {
     if (response.data.queryStatus) {
+      console.log(response)
       return true;
     } else {
+      console.log(response);
       console.log('Invalid Token');
       return false;
     }

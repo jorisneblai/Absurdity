@@ -4,6 +4,7 @@ import authHeader from '../../Middlewares/AuthHeader';
 import { Input, Label, Divider, Button } from 'semantic-ui-react';
 import './Profil.scss';
 import patchData from '../../Middlewares/PatchDataMiddleware';
+import DeleteDataMiddleware from '../../Middlewares/DeleteDataMiddleware';
 
 function Profil() {
 
@@ -12,6 +13,7 @@ function Profil() {
     const [newPseudo, setNewPseudo] = useState(false);
     const [valuePseudo, setValuePseudo] = useState('');
     const [valuePassword, setValuePassword] = useState('');
+   
 
     useEffect(() => {
         const f = async () => {
@@ -42,7 +44,23 @@ function Profil() {
         }
         updatePseudo();
         console.log(newPseudo);
-    }    
+    }  
+    
+    function deleteProfil() {
+        const tryDeleteProfil = async () => {
+          const deleted = await DeleteDataMiddleware('user');
+          if (!deleted) {
+              console.log("Profil non supprimée");
+          } else {
+              console.log("Profil supprimée");
+              localStorage.removeItem('user');
+              navigate('/');
+          }
+      }
+      tryDeleteProfil();
+    
+    };
+        
     
     if(!data) {
         return (
@@ -97,14 +115,16 @@ function Profil() {
                         >
                             Sauvegarder les modifications
                     </Button>
+                </form>
                     <Button 
-                        
                         circular
                         icon="trash alternate"
+                        onClick={() => {
+                            deleteProfil();
+                        }}
                         >
                             
                     </Button>
-                </form>
             </main>
         );}
     }
