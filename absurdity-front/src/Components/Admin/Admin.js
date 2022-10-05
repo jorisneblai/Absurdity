@@ -1,81 +1,83 @@
-import React from 'react';
-import { Segment, Header, Input, Message, Button, Icon } from 'semantic-ui-react';
+import { Segment, Header, Input, Message, Button, Icon, Menu } from 'semantic-ui-react';
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import getData from '../../Middlewares/GetDataMiddleware';
 import authHeader from '../../Middlewares/AuthHeader';
 import sendDataMiddleware from '../../Middlewares/SendDataMiddleware';
-import DeleteDataMiddleware from '../../Middlewares/DeleteDataMiddleware';
-
+import deleteDataMiddleware from '../../Middlewares/DeleteDataMiddleware';
 
 function Admin() {
-  const [data, setData] = useState(null);
-  const [connected, setConnected] = useState(false);
-  const [value, setValue] = useState('')
-  const [createdQuestion, setCreatedQuestion] = useState(null);
-  const [questionsList, setQuestionsList] = useState(null);
+    const [connected, setConnected] = useState(false);
+    const [questionsList, setQuestionsList] = useState(null);
+    const [createdQuestion, setCreatedQuestion] = useState(null);
+    const [value, setValue] = useState('');
+    const navigate = useNavigate();
 
-
-useEffect(() => {
+    useEffect(() => {
         const connect = async () => {
             const newData = await authHeader('user');
             if (!newData) {
-                setConnected(false)
+                setConnected(false);
             } else {
                 setConnected(true);
             }
         }
         connect();
-        const f = async () => {
-          const newData = await getData('questions');
-          if (!newData) {
-              setData(null)
+       
+    
+    const allQuestions = async () => {
+          const newDataQuestions = await getData('admin/questions');
+          if (!newDataQuestions) {
+              setQuestionsList(null);
           } else {
-              setData(newData);
-
-          }
-      }
-      f();
-      const allQuestions = async () => {
-          const newData = await getData('questions');
-          if (!newData) {
-              setQuestionsList(null)
-          } else {
-              setQuestionsList(newData);
-
+              setQuestionsList(newDataQuestions);
+            console.log(newDataQuestions);
           }
       }
       allQuestions();
   }, []);
 
-
-    function createQuestion() {
-        const tryCreateQuestion = async () => {
-            const delivered = await sendDataMiddleware('/questions', value);
-            if (!delivered) {
-                console.log("Votre question a bien été créée")
-                setCreatedQuestion(false)
-            } else {
-                console.log("Votre question n'a pas été créée")
-                setCreatedQuestion(true);
-                setValue('');
-            }
+  function createQuestion() {
+    const tryCreateQuestion = async () => {
+        const delivered = await sendDataMiddleware('questions', value);
+        if (!delivered) {
+            console.log("Question créée");
+            setCreatedQuestion(false);
+        } else {
+            console.log("Question non créée");
+            setCreatedQuestion(true);
+            setValue('');
         }
-        tryCreateQuestion()
     }
+    tryCreateQuestion();
+};
 
-
+function deleteQuestion(path) {
+    const questionPath = 'question/' + path;
+    const tryDeleteQuestion = async () => {
+      const deleted = await deleteDataMiddleware(questionPath);
+      if (!deleted) {
+          console.log("Question non supprimée");
+      } else {
+          console.log("Question supprimée");
+          navigate('/admin');
+      }
+  }
+  tryDeleteQuestion();
+  };
 
     return (
-      <main className="Admin">
+        <main className="Admin">
        <Segment className="Home-top_question">
                 <Header className="Home-top_question-title" as="h2">
-                    Créez votre question :
+                    Crée ta question :
                 </Header>
-  {createdQuestion === true ?
+
+                {createdQuestion === true ?
       <Message positive>
-          <Message.Header>Votre question a bien été créée!</Message.Header>
+          <Message.Header>Ta question a bien été créée!</Message.Header>
           <p>
-              Master of creation...
+              Tu peux lire Émile Zola ou Picsou Magazine en attendant les réponses
           </p>
       </Message>
       : ''
@@ -92,6 +94,7 @@ useEffect(() => {
       <form
           className="Home-form"
           onSubmit={(event) => {
+            event.preventDefault();
               createQuestion();
           }}>
 
@@ -108,35 +111,45 @@ useEffect(() => {
       </form>
       : ''
   }
-  </Segment>
+
+        </Segment>
 
 
-  {questionsList ? (
+
+        {questionsList ? (
                 <ul>
-                    {questionsList.data.map((value) => {
+                    {questionsList.data.map((question) => {
                         return (
-                        <li key={value.questions}>
-                        <Segment>
-                         Question
-                            <Button>
+                        <li key={question.id}>
+                        <Menu borderless>
+                        <Menu.Item position="left">
+                        {question.content}
+                        </Menu.Item>
+                        <Menu.Item position="right">
+                            <Button floated="right" 
+                            
+                            >
                               <Icon name="pencil alternate"/>
                               </Button>
-                              <Button>
-                              <Icon name="trash alternate"/>
-                            </Button>
-                        </Segment>
+                              
+                               <Button floated="right"
+                               onClick={() => {
+                                deleteQuestion(question.id);
+                              }}>
+                             <Icon name="trash alternate"
+                            /> 
+   
+                            </Button> 
+                            </Menu.Item>
+                        </Menu>
                         </li>)
                     })}
                 </ul>
             ) : ''}
 
 
-  </main>
- )}
 
-
-
-
-
-
+        </main>
+    )
+}
 export default Admin;
