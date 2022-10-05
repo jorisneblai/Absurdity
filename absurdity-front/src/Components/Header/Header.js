@@ -8,7 +8,7 @@ import { NavLink } from 'react-router-dom';
 
 function Header() {
     return (
-        <Menu className="Header" borderless >
+        <Menu fixed='top' className="Header" borderless >
             <Menu.Item  position="left" as={NavLink} to="/">
             <img
                 className="Header-logo"

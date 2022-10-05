@@ -10,8 +10,6 @@ import Profil from '../Components/Profil/Profil';
 import Admin from '../Components/Admin/Admin';
 import { Routes, Route } from 'react-router-dom';
 
-
-
 function App() {
   return (
     <main className="App">

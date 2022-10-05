@@ -1,5 +1,5 @@
 import './NavBar.scss';
-import { Menu, Dropdown, Transition } from 'semantic-ui-react';
+import { Menu, Dropdown } from 'semantic-ui-react';
 import { NavLink } from 'react-router-dom';
 import authHeader from '../../../Middlewares/AuthHeader';
 import { useEffect } from 'react';

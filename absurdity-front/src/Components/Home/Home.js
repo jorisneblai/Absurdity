@@ -131,10 +131,10 @@ function Home() {
 
             {questionsList? (
                 <ul>
-                    {questionsList.data.map((value, key) => {
+                    {questionsList.data.map((value) => {
                         return (
-                        <li key={key}>
-                        <PreviousQuestion user='tutu' questionTitle={value.content} userAnswer='truc' path={`/question/${key}`} />
+                        <li key={value.question_id}>
+                        <PreviousQuestion user={value.list_answers[0].pseudo} questionTitle={value.question} userAnswer={value.list_answers[0].answer} path={`/question/${value.question_id}`} />
                         </li>)
                     })}
                 </ul>

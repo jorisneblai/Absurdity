@@ -28,12 +28,13 @@ function About() {
             </Container>
 
             <Container className="Trombi">
-            <AboutProfil image={joris} name='Joris' role='Lead Dev Front' description='The dark side of the front' />
+                <AboutProfil/>
                 <AboutProfil image={joris} name='Joris' role='Lead Dev Front' description='The dark side of the front' />
                 <AboutProfil image={nabiha} name='Nabiha' role='Référente technologies' description='Nabiha ne fait pas le moine' />
                 <AboutProfil image={nicolas} name='Nicolas' role='Lead Dev Back' description="à toi jeune entrepreneur, l'introduction en bourse d'absurdity est proche !" />
                 <AboutProfil image={romain} name='Romain' role='Scrum Master et Git Master' description="C'est en commençant par tout détruire que nous pouvons reconstruire. [DIEU]" />
                 <AboutProfil image={thibault} name='Thibault' role='Product Owner' description="Un jour j'irai vivre en théorie parce qu'en théorie tout se passe bien" />
+                <AboutProfil />
             </Container>
         </main>
     )

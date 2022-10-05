@@ -24,9 +24,10 @@
         max-width: 200px;
     }
 }
-.ui.card:first-child {
+.ui.card:first-child, .ui.card:last-child {
     display: none;
 }
+
 
 .ui .card {
     margin: 1rem 0;
