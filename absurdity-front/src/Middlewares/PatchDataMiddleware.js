@@ -16,11 +16,12 @@ import axios from 'axios';
   ).then((response) => {
     if (response.data.queryStatus) {
       console.log('Content modified', response.data)
-      if (response.data.data.token) {
+      if (response.data.data && response.data.data.token) {
         localStorage.setItem("user", JSON.stringify(response.data.data.token));
       }
       return response.data;
     } else {
+      console.log(response);
       console.log('Invalid Token');
       return false;
     }

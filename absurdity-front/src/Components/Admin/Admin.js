@@ -1,17 +1,19 @@
 import { Segment, Header, Input, Message, Button, Icon, Menu } from 'semantic-ui-react';
+import './Admin.scss';
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import getData from '../../Middlewares/GetDataMiddleware';
 import authHeader from '../../Middlewares/AuthHeader';
 import sendDataMiddleware from '../../Middlewares/SendDataMiddleware';
 import deleteDataMiddleware from '../../Middlewares/DeleteDataMiddleware';
+import patchData from '../../Middlewares/PatchDataMiddleware';
 
 function Admin() {
     const [connected, setConnected] = useState(false);
     const [questionsList, setQuestionsList] = useState(null);
     const [createdQuestion, setCreatedQuestion] = useState(null);
     const [value, setValue] = useState('');
-    const navigate = useNavigate();
+    const [patchInput, setPatchInput] = useState(false);
+    const [patchValue, setPatchValue] = useState('');
 
     useEffect(() => {
         const connect = async () => {
@@ -47,6 +49,7 @@ function Admin() {
             console.log("Question non créée");
             setCreatedQuestion(true);
             setValue('');
+            window.location.reload();
         }
     }
     tryCreateQuestion();
@@ -60,16 +63,32 @@ function deleteQuestion(path) {
           console.log("Question non supprimée");
       } else {
           console.log("Question supprimée");
-          navigate('/admin');
+          window.location.reload();
       }
   }
   tryDeleteQuestion();
   };
 
+  function patchQuestion(path) {
+    const questionContent = 'question/' + path;
+    const tryPatchQuestion = async () => {
+      const patched = await patchData(questionContent, patchValue);
+      if (!patched) {
+        console.log("Question non modifiée")
+      } else {
+        console.log("Question modifiée");
+        window.location.reload();
+
+      }
+    }
+    tryPatchQuestion();
+
+  } 
+
     return (
         <main className="Admin">
-       <Segment className="Home-top_question">
-                <Header className="Home-top_question-title" as="h2">
+       <Segment className="Admin-question">
+                <Header className="Admin-question-title" as="h2">
                     Crée ta question :
                 </Header>
 
@@ -92,7 +111,7 @@ function deleteQuestion(path) {
   }
   {createdQuestion === null ?
       <form
-          className="Home-form"
+          className="Admin-form"
           onSubmit={(event) => {
             event.preventDefault();
               createQuestion();
@@ -122,12 +141,35 @@ function deleteQuestion(path) {
                         return (
                         <li key={question.id}>
                         <Menu borderless>
+                        {patchInput !== question.id ? 
                         <Menu.Item position="left">
                         {question.content}
-                        </Menu.Item>
+                        </Menu.Item> : <form
+                        onSubmit={(event) => {
+                          event.preventDefault();
+                          patchQuestion(question.id);
+                        }}
+                                 
+                        >
+                        <Input
+                         action={{ icon: "arrow alternate circle right" }}
+                         value={patchValue}
+                         onChange={(event) => {
+                             setPatchValue(event.target.value);
+                         }}
+                         fluid
+                        >
+                        
+                        </Input>
+                     
+                        </form>}
+
                         <Menu.Item position="right">
                             <Button floated="right" 
+                           onClick={() => {
+                            setPatchInput(question.id)
                             
+                            }}
                             >
                               <Icon name="pencil alternate"/>
                               </Button>
