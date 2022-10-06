@@ -14,6 +14,11 @@
 .Home-top_question,
 .Home-questions {
     margin-bottom: 2rem;
+    font-family: $base-font !important;
+}
+
+.Home-top_question-title{
+    font-family: $base-font !important;
 }
 
 .Home-questions {
@@ -47,6 +52,10 @@
 .Home-form {
     max-width: 60%;
     margin: 0 auto;
+}
+
+#root > main > main > div > form > div > input[type=text] {
+    font-family: $base-font !important;
 }
 
 #root > main > main > div.ui.segment.Home-top_question > div > a {

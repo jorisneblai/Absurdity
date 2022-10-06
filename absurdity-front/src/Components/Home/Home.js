@@ -30,12 +30,12 @@ function Home() {
         }
         connect();
         const f = async () => {
-            const newData = await getData('question/1');
+            const newData = await getData('dailyquestion');
             if (!newData) {
                 setData(null)
             } else {
                 setData(newData);
-
+                console.log(newData)
             }
         }
         f();
@@ -53,7 +53,7 @@ function Home() {
 
     function sendAnswer() {
         const trySendAnswer = async () => {
-            const delivered = await sendDataMiddleware('question/1/answer', value);
+            const delivered = await sendDataMiddleware(`question/${data.data.id}/answer`, value);
             if (!delivered) {
                 console.log("Answer not delivered")
                 setAnswered(false)

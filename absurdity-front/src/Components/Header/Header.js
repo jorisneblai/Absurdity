@@ -7,7 +7,7 @@ import { NavLink } from 'react-router-dom';
 
 
 function Header() {
-    return (
+    return (<>
         <Menu fixed='top' className="Header" borderless >
             <Menu.Item  position="left" as={NavLink} to="/">
             <img
@@ -21,7 +21,10 @@ function Header() {
             <Menu.Item position="right">
                 <NavBar />
             </Menu.Item>
+            
         </Menu>
+        <div id='Divider-Header'></div>
+        </>
     )
 }
 

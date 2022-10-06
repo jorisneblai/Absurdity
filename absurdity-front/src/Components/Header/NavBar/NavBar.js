@@ -4,16 +4,19 @@ import { NavLink } from 'react-router-dom';
 import authHeader from '../../../Middlewares/AuthHeader';
 import { useEffect } from 'react';
 import isLoggedMiddleware from '../../../Middlewares/isLoggedMiddleware';
-
+import Cookies from 'universal-cookie';
 
 function NavBar() {
+    const cookies = new Cookies();
 
     useEffect(() => {
         const f = async () => {
-            const newData = await authHeader('checkuser');
+            const newData = await authHeader('user');
             if (!newData) {
+                console.log(newData)
                 return
             } else {
+                console.log(newData)
                 return
             }
         }
@@ -21,14 +24,15 @@ function NavBar() {
     }, []);
 
     function logOut() {
-        localStorage.removeItem("user");
+        cookies.remove('user');
+        //localStorage.removeItem("user");
         window.location.reload();
     };
 
     return (
         <nav className="NavBar">
-            <Menu>
-                {isLoggedMiddleware() ? <Menu.Item
+            <Menu id='NavBar-Menu'>
+                {isLoggedMiddleware() ? <Menu.Item id='NavBar-ButtonProfil'
                     icon="user"
                     as={NavLink} to="/profil"
                 >
@@ -38,7 +42,7 @@ function NavBar() {
                         as={NavLink} to="/login"
                     >Se connecter
                     </Menu.Item>}
-                <Dropdown icon="bars" item direction="left">
+                <Dropdown icon="bars" item direction="left" id='NavBar-ButtonDropdown'>
                     <Dropdown.Menu>
                         <Dropdown.Item as={NavLink} to="/">Accueil</Dropdown.Item>
                         <Dropdown.Item as={NavLink} to="/about">À propos</Dropdown.Item>
