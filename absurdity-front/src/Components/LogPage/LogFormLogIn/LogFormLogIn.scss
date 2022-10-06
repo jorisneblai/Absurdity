@@ -1,3 +1,4 @@
+@import "../../../index.scss";
 .LogFormLogIn {
     font-size: 22px;
     color: #000;
@@ -19,11 +20,16 @@ a, a:visited {
     color: #fff;
 }
 
+h1 {
+    font-family: $base-font;
+    font-weight: 500;
+}
+
 input[type="text"],
 input[type="password"],
 button,
 textarea {
-  font-family: 'Nunito', sans-serif;
+  font-family: $base-font;
   font-size: 22px;
   padding: 0.25rem;
   border-radius: 0.5rem;

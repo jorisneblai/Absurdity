@@ -3,13 +3,14 @@ import './LogFormLogIn.scss';
 import axios from 'axios';
 import authHeader from '../../../Middlewares/AuthHeader';
 import { useNavigate } from 'react-router';
+import Cookies from 'universal-cookie';
 
 const LogFormLogIn = () => {
     const userRef = useRef();
     const errRef = useRef();
     const baseURL = process.env.REACT_APP_API_URL;
     const navigate = useNavigate();
-
+    const cookies = new Cookies();
 
     const [user, setUser] = useState('');
     const [pwd, setPwd] = useState('');
@@ -53,7 +54,8 @@ const LogFormLogIn = () => {
                 );
                 /* if with got a response stocking an access token, we put it in the Local Storage */
                 if (response.data) {
-                    localStorage.setItem("user", JSON.stringify(response.data.data.token));
+                    cookies.set('user', response.data.data.token);
+                   // localStorage.setItem("user", response.data.data.token);
                 }
                 setUser('');
                 setPwd('');

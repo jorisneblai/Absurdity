@@ -1,3 +1,4 @@
+@import '../../index.scss';
 .About-main {
     display: flex;
     flex-direction: column;
@@ -11,7 +12,7 @@
 }
 .container.About-bio > h1 {
     font-size: xxx-large;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: $base-font;
     text-transform:uppercase;
 }
 
@@ -40,4 +41,8 @@
 
     }
 }
-        
+    
+
+#root > main > main > div.ui.container.Trombi > div > div.content > div.header {
+    font-family: $base-font !important;
+}

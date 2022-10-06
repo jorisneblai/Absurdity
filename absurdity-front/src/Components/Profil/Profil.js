@@ -5,9 +5,10 @@ import { Input, Label, Divider, Button } from 'semantic-ui-react';
 import './Profil.scss';
 import patchData from '../../Middlewares/PatchDataMiddleware';
 import DeleteDataMiddleware from '../../Middlewares/DeleteDataMiddleware';
+import Cookies from 'universal-cookie';
 
 function Profil() {
-
+    const cookies = new Cookies();
     const navigate = useNavigate();
     const [data, setData] = useState(null);
     const [newPseudo, setNewPseudo] = useState(false);
@@ -43,7 +44,6 @@ function Profil() {
             }
         }
         updatePseudo();
-        console.log(newPseudo);
     }  
     
     function deleteProfil() {
@@ -53,7 +53,8 @@ function Profil() {
               console.log("Profil non supprimée");
           } else {
               console.log("Profil supprimée");
-              localStorage.removeItem('user');
+              cookies.remove('user');
+              //localStorage.removeItem('user');
               navigate('/');
           }
       }
@@ -77,7 +78,6 @@ function Profil() {
                     onSubmit={(event) => {
                         event.preventDefault();
                         const data = new FormData(event.target);
-                        console.log(data.get("password"));
                         updateProfil(data.get("pseudo"), data.get("password"));
                     }}>
                     <Input 
