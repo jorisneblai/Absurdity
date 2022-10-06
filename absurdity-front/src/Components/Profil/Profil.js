@@ -38,6 +38,7 @@ function Profil() {
             } else {
                 console.log('Pseudo or pwd modified')
                 setNewPseudo(true);
+                console.log(newPseudo);
                 setValuePseudo('');
                 setValuePassword('');
                 window.location.reload();

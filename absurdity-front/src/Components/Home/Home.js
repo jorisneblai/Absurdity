@@ -35,7 +35,6 @@ function Home() {
                 setData(null)
             } else {
                 setData(newData);
-                console.log(newData)
             }
         }
         f();
@@ -123,10 +122,14 @@ function Home() {
                     </form>
                     : ''
                 }
-
-                <Button icon circular className="Home-questions_button">
+                {data ?
+                <Button icon circular className="Home-questions_button" as='a' href={`/question/${data.data.id}`}>
                     <Icon name="ellipsis horizontal" />
                 </Button>
+                : <Button icon circular className="Home-questions_button" as='a'>
+                    <Icon name="ellipsis horizontal" />
+                </Button>
+                }
             </Segment>
 
             {questionsList? (
