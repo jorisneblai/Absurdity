@@ -35,7 +35,6 @@ function Home() {
                 setData(null)
             } else {
                 setData(newData);
-                console.log(newData)
             }
         }
         f();

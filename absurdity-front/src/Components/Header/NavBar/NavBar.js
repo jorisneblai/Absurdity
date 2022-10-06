@@ -2,30 +2,31 @@ import './NavBar.scss';
 import { Menu, Dropdown } from 'semantic-ui-react';
 import { NavLink } from 'react-router-dom';
 import authHeader from '../../../Middlewares/AuthHeader';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import isLoggedMiddleware from '../../../Middlewares/isLoggedMiddleware';
 import Cookies from 'universal-cookie';
 
 function NavBar() {
+    const [isLogged, setIsLogged] = useState(false);
     const cookies = new Cookies();
 
     useEffect(() => {
         const f = async () => {
             const newData = await authHeader('user');
             if (!newData) {
-                console.log(newData)
-                return
+                setIsLogged(false)
             } else {
-                console.log(newData)
-                return
+                setIsLogged(true)
             }
         }
         f();
-    }, []);
+
+    }, [isLogged]);
+
+
 
     function logOut() {
         cookies.remove('user');
-        //localStorage.removeItem("user");
         window.location.reload();
     };
 
@@ -47,7 +48,7 @@ function NavBar() {
                         <Dropdown.Item as={NavLink} to="/">Accueil</Dropdown.Item>
                         <Dropdown.Item as={NavLink} to="/about">À propos</Dropdown.Item>
                         <Dropdown.Item as={NavLink} to="/cgu">CGU</Dropdown.Item>
-                        {isLoggedMiddleware()
+                        {isLoggedMiddleware() 
                             ? <Dropdown.Item
                                 id='LogOutButton'
                                 onClick={() => logOut()}
