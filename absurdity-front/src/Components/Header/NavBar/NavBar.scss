@@ -15,10 +15,23 @@
     box-shadow: none !important;
 }
 
+#NavBar-ButtonLogIn {
+    background-color: $base-color;
+    border: 1px solid $background-color !important;
+    box-shadow: none !important;
+    transition: all .3s ease-out;
+}
+
 #NavBar-ButtonProfil:hover, #NavBar-ButtonDropdown:hover {
     background-color: $secondary-color;
 }
-#NavBar-ButtonProfil {
+
+#NavBar-ButtonLogIn:hover {
+    background-color: $lightgrey-color;
+
+}
+
+#NavBar-ButtonProfil, #NavBar-ButtonLogIn {
     border-top-left-radius: 10px !important ;
     border-bottom-left-radius: 10px !important ;
 }
@@ -27,16 +40,20 @@
     border-bottom-right-radius: 10px !important ;
 }
 
-#NavBar-ButtonProfil > i,#NavBar-ButtonDropdown > i {
+#NavBar-ButtonProfil > i,#NavBar-ButtonDropdown > i{
     width:25px;
     font-size:1rem;
     image-rendering: pixelated;
     color: $background-color;
 }
 
-.DropdownMenu{
-    z-index: 200;
+#NavBar-ButtonLogIn.item {
+    color: $base-color-dark;
 }
+
+
+
+
 
 #root > main > div > div > nav > div {
     font-family: $base-font !important;

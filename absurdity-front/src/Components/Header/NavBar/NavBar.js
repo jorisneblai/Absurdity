@@ -36,7 +36,7 @@ function NavBar() {
                 >
                 </Menu.Item>
                     :
-                    <Menu.Item
+                    <Menu.Item id='NavBar-ButtonLogIn'
                         as={NavLink} to="/login"
                     >Se connecter
                     </Menu.Item>}
