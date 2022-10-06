@@ -41,7 +41,7 @@ function NavBar() {
                     >Se connecter
                     </Menu.Item>}
                 <Dropdown icon="bars" item direction="left" id='NavBar-ButtonDropdown'>
-                    <Dropdown.Menu>
+                    <Dropdown.Menu className='DropdownMenu'>
                         <Dropdown.Item as={NavLink} to="/">Accueil</Dropdown.Item>
                         <Dropdown.Item as={NavLink} to="/about">À propos</Dropdown.Item>
                         <Dropdown.Item as={NavLink} to="/cgu">CGU</Dropdown.Item>

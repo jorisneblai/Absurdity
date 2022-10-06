@@ -34,7 +34,9 @@
     color: $background-color;
 }
 
-
+.DropdownMenu{
+    z-index: 200;
+}
 
 #root > main > div > div > nav > div {
     font-family: $base-font !important;
