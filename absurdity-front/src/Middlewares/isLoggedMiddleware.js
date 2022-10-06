@@ -2,10 +2,10 @@
 import Cookie from 'universal-cookie'
 
 export default function isLoggedMiddleware() {
-    const cookies = new Cookie();
- const isLogged = cookies.get('user');
+const cookies = new Cookie();
+const isLogged = cookies.get('user');
 
- if(isLogged) {
+if(isLogged) {
      return true
  } else {
      return false

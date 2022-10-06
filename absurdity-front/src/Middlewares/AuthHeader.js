@@ -13,6 +13,7 @@ import Cookies from 'universal-cookie';
    const data = await axios.get(`${baseURL}${route}?token=${token}`
 
   ).then((response) => {
+    console.log(response)
     if (response.data.queryStatus) {
       return response.data;
     } else {
@@ -20,6 +21,9 @@ import Cookies from 'universal-cookie';
       return false;
     }
   }).catch((error) => {
+    if(error.response.status === 511) {
+      cookies.remove('user');
+    }
     console.log(error)
     return false;
   })
