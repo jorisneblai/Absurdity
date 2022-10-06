@@ -88,8 +88,8 @@ function Home() {
                 }
                 {answered === false && connected ?
                     <Message negative >
-                        <Message.Header>C'était presque ça !</Message.Header>
-                        <p>mais, c'est pas ça.</p>
+                        <Message.Header>Euh, attends t'as pas déjà répondu toi ?</Message.Header>
+                        <p>Parce que tu ressemble vachement à quelqu'un qui aurait déjà répondu quand même.</p>
                     </Message>
                     : ''
                 }

@@ -13,10 +13,8 @@ function NavBar() {
         const f = async () => {
             const newData = await authHeader('user');
             if (!newData) {
-                console.log(newData)
                 return
             } else {
-                console.log(newData)
                 return
             }
         }
