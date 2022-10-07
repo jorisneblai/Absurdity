@@ -1,3 +1,4 @@
+@import "../../../index.scss";
 .LogFormSignUp {
     font-size: 22px;
     color: #000;
@@ -7,6 +8,13 @@
     width: calc(100% + 2px);
 }
 
+.ConfirmSignUpSection {
+    text-align: center;
+}
+
+.AdvicesSignUp{
+    font-size: small;
+}
 
 form {
     display: flex;
@@ -25,7 +33,7 @@ input[type="password"],
 input[type="email"],
 button,
 textarea {
-  font-family: 'Nunito', sans-serif;
+  font-family: $base-font;
   font-size: 22px;
   padding: 0.25rem;
   border-radius: 0.5rem;

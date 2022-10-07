@@ -6,8 +6,12 @@ import authHeader from '../../Middlewares/AuthHeader';
 import sendDataMiddleware from '../../Middlewares/SendDataMiddleware';
 import deleteDataMiddleware from '../../Middlewares/DeleteDataMiddleware';
 import patchData from '../../Middlewares/PatchDataMiddleware';
+import {useNavigate} from 'react-router-dom';
 
 function Admin() {
+
+    const navigate = useNavigate();
+
     const [connected, setConnected] = useState(false);
     const [questionsList, setQuestionsList] = useState(null);
     const [createdQuestion, setCreatedQuestion] = useState(null);
@@ -20,6 +24,7 @@ function Admin() {
             const newData = await authHeader('user');
             if (!newData) {
                 setConnected(false);
+                navigate('/')
             } else {
                 setConnected(true);
             }
@@ -37,7 +42,7 @@ function Admin() {
           }
       }
       allQuestions();
-  }, []);
+  }, [navigate]);
 
   function createQuestion() {
     const tryCreateQuestion = async () => {

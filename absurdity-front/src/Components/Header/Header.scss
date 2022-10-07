@@ -1,3 +1,23 @@
+@import '../../index.scss';
+#root > main > div{
+    background-color: $background-color;
+    box-shadow: none;
+    border-bottom: none;
+}
+#Divider-Header{
+    z-index: 100;
+    position: fixed;
+    top:68px;
+    width:98%;
+    margin-left:1%;
+    border: 10px solid $primary-color;
+    border-radius: 15px;
+}
+
+#root > main > div > a{
+    background-color: $background-color;
+}
+
 .ui.menu .item>img:not(.ui) {
     width: 8rem;
 }
@@ -14,8 +34,18 @@
     .Header {
         max-height: 50px;
     }
+    #Divider-Header{
+        top:50px;   
+    }
 
     .ui.menu .item>img:not(.ui) {
-        width: 5rem;
+        width: 6rem;
     }
 }
+
+.ui.menu .item>img:not(.ui):hover {
+
+    animation: .5s ease-out 0s both logo_move;
+}
+
+@keyframes logo_move { from { filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(169deg) brightness(96%) contrast(101%); } to { filter: invert(50%) sepia(40%) saturate(424%) hue-rotate(169deg) brightness(96%) contrast(101%); }  }

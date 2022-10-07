@@ -2,15 +2,17 @@ import './NavBar.scss';
 import { Menu, Dropdown } from 'semantic-ui-react';
 import { NavLink } from 'react-router-dom';
 import authHeader from '../../../Middlewares/AuthHeader';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import isLoggedMiddleware from '../../../Middlewares/isLoggedMiddleware';
-
+import Cookies from 'universal-cookie';
 
 function NavBar() {
+    const [isLogged, setIsLogged] = useState(false);
+    const cookies = new Cookies();
 
     useEffect(() => {
         const f = async () => {
-            const newData = await authHeader('checkuser');
+            const newData = await authHeader('user');
             if (!newData) {
                 return
             } else {
@@ -18,32 +20,35 @@ function NavBar() {
             }
         }
         f();
-    }, []);
+
+    }, [isLogged]);
+
+
 
     function logOut() {
-        localStorage.removeItem("user");
+        cookies.remove('user');
         window.location.reload();
     };
 
     return (
         <nav className="NavBar">
-            <Menu>
-                {isLoggedMiddleware() ? <Menu.Item
+            <Menu id='NavBar-Menu'>
+                {isLoggedMiddleware() ? <Menu.Item id='NavBar-ButtonProfil'
                     icon="user"
                     as={NavLink} to="/profil"
                 >
                 </Menu.Item>
                     :
-                    <Menu.Item
+                    <Menu.Item id='NavBar-ButtonLogIn'
                         as={NavLink} to="/login"
                     >Se connecter
                     </Menu.Item>}
-                <Dropdown icon="bars" item direction="left">
-                    <Dropdown.Menu>
+                <Dropdown icon="bars" item direction="left" id='NavBar-ButtonDropdown'>
+                    <Dropdown.Menu className='DropdownMenu'>
                         <Dropdown.Item as={NavLink} to="/">Accueil</Dropdown.Item>
                         <Dropdown.Item as={NavLink} to="/about">À propos</Dropdown.Item>
                         <Dropdown.Item as={NavLink} to="/cgu">CGU</Dropdown.Item>
-                        {isLoggedMiddleware()
+                        {isLoggedMiddleware() 
                             ? <Dropdown.Item
                                 id='LogOutButton'
                                 onClick={() => logOut()}

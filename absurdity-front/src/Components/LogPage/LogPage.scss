@@ -1,5 +1,11 @@
+@import '../../index.scss';
+
 .LogPage {
     background-color: #fff;
     max-width: 450px;
     margin: 0 auto;
+}
+
+#root > main > section > nav > div > a{
+    font-family: $base-font !important;
 }

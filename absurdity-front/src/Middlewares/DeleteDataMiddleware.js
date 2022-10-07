@@ -1,19 +1,17 @@
 /*DeleteDataMiddleware is a middleware used to get the data of a called API path, verifying if there is a valid token, it is used to delete data*/
 
 import axios from 'axios';
+import Cookie from 'universal-cookie'
 
  async function DeleteDataMiddleware(route){
+   const cookies = new Cookie()
 
-  const token = localStorage.getItem('user') || null;
+  const token = cookies.get('user') || null;
   if(token === null) {return false}
   const baseURL = process.env.REACT_APP_API_URL;
   console.log(token);
-   const data = await axios.put(`${baseURL}${route}`,
-   JSON.stringify({ token }),
+   const data = await axios.delete(`${baseURL}${route}?token=${token}`
 
-    {
-      headers: { 'Content-Type': 'application/json' },
-    }
   ).then((response) => {
     if (response.data.queryStatus) {
       console.log(response)

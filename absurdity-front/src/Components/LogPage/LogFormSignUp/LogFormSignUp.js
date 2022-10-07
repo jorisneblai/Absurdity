@@ -4,16 +4,25 @@ import axios from 'axios';
 import authHeader from '../../../Middlewares/AuthHeader';
 import { useNavigate } from 'react-router';
 
-function LogFormSignUp(  ) {
+const USER_REGEX = /^[A-z][A-z0-9-_]{3,24}$/;
+const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,24}$/;
+
+function LogFormSignUp() {
+
     const userRef = useRef();
     const errRef = useRef();
     const baseURL = process.env.REACT_APP_API_URL;
     const navigate = useNavigate()
 
     const [email, setEmail] = useState('');
+
     const [user, setUser] = useState('');
+    const [validName, setValidName] = useState(false);
+
     const [pwd, setPwd] = useState('');
+    const [validPwd, setValidPwd] = useState(false);
     const [matchPwd, setMatchPwd] = useState('');
+
     const [errMsg, setErrMsg] = useState('');
     const [validMatch, setValidMatch] = useState(false);
     const [success, setSuccess] = useState(false);
@@ -30,12 +39,17 @@ function LogFormSignUp(  ) {
         }
         f();
 
-    userRef.current.focus();
-}, [navigate]);
+        userRef.current.focus();
+    }, [navigate]);
 
-useEffect(() => {
-    setValidMatch(pwd === matchPwd);
-}, [pwd, matchPwd])
+    useEffect(() => {
+        setValidName(USER_REGEX.test(user));
+    }, [user])
+
+    useEffect(() => {
+        setValidPwd(PWD_REGEX.test(pwd));
+        setValidMatch(pwd === matchPwd);
+    }, [pwd, matchPwd])
 
 
     useEffect(() => {
@@ -45,7 +59,15 @@ useEffect(() => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const pseudo = user;
-        const password = pwd; 
+        const password = pwd;
+
+        const v1 = USER_REGEX.test(pseudo);
+        const v2 = PWD_REGEX.test(password);
+        if (!v1 || !v2) {
+            setErrMsg("Invalid Entry");
+            return;
+        }
+
         try {
             const response = await axios.post(`${baseURL}sign-up`,
                 JSON.stringify({ pseudo, password, email }),
@@ -53,9 +75,7 @@ useEffect(() => {
                     headers: { 'Content-Type': 'application/json' },
                 }
             );
-            console.log(response.data);
-            console.log(response.accessToken);
-            console.log(JSON.stringify(response))
+            console.log(response);
             setSuccess(true);
             setUser('');
             setPwd('');
@@ -71,11 +91,13 @@ useEffect(() => {
             errRef.current.focus();
         }
     }
-    return ( 
+    return (
         <div className="LogFormSignUp">
-             {success ? (
-                <section>
+            {success ? (
+                <section className="ConfirmSignUpSection">
                     <h1>Vous êtes inscrit.e !</h1>
+                    <p>Plus qu'à se connecter !</p>
+                    <p>(C'est la procédure standard)</p>
                 </section>
             ) : (
                 <section>
@@ -83,8 +105,8 @@ useEffect(() => {
                     <h1>S'inscrire</h1>
                     <form onSubmit={handleSubmit}>
 
-                    <label htmlFor="username">
-                            E-Mail :
+                        <label htmlFor="username">
+                            E-Mail
                         </label>
                         <input
                             type="email"
@@ -94,10 +116,11 @@ useEffect(() => {
                             onChange={(event) => setEmail(event.target.value)}
                             value={email}
                             required
+
                         />
 
                         <label htmlFor="username">
-                            Pseudo :
+                            Pseudo <p className="AdvicesSignUp">(entre 4 et 24 caractères et commençant par une lettre)</p>
                         </label>
                         <input
                             type="text"
@@ -109,7 +132,7 @@ useEffect(() => {
                         />
 
                         <label htmlFor="password">
-                            Mot de passe :
+                            Mot de passe <p className="AdvicesSignUp">(entre 8 et 24 caractères dont au moins 1 majuscule, 1 minuscule et un chiffre)</p>
                         </label>
                         <input
                             type="password"
@@ -120,7 +143,7 @@ useEffect(() => {
                         />
 
                         <label htmlFor="confirm_pwd">
-                            Confirmation du mot de passe :
+                            Confirmation du mot de passe
                         </label>
                         <input
                             type="password"
@@ -130,13 +153,13 @@ useEffect(() => {
                             required
                         />
 
-                        <button disabled={!validMatch ? true : false}>S'inscrire</button>
+                        <button disabled={!validName || !validPwd || !validMatch  ? true : false}>S'inscrire</button>
                     </form>
                 </section>
             )}
-        
+
         </div>
-     );
+    );
 }
 
 export default LogFormSignUp;

@@ -30,12 +30,11 @@ function Home() {
         }
         connect();
         const f = async () => {
-            const newData = await getData('question/1');
+            const newData = await getData('dailyquestion');
             if (!newData) {
                 setData(null)
             } else {
                 setData(newData);
-
             }
         }
         f();
@@ -53,7 +52,7 @@ function Home() {
 
     function sendAnswer() {
         const trySendAnswer = async () => {
-            const delivered = await sendDataMiddleware('question/1/answer', value);
+            const delivered = await sendDataMiddleware(`question/${data.data.id}/answer`, value);
             if (!delivered) {
                 console.log("Answer not delivered")
                 setAnswered(false)
@@ -68,7 +67,7 @@ function Home() {
 
     return (
         <main className="Home">
-            <Header className="Home-title" as="h1">
+            <Header className="Home-title">
                 Absurdity, des vannes à toutes heures. L'absurdité dans toute sa Chandeleur.
             </Header>
             <Segment className="Home-top_question">
@@ -89,8 +88,8 @@ function Home() {
                 }
                 {answered === false && connected ?
                     <Message negative >
-                        <Message.Header>C'était presque ça !</Message.Header>
-                        <p>mais, c'est pas ça.</p>
+                        <Message.Header>Euh, attends t'as pas déjà répondu toi ?</Message.Header>
+                        <p>Parce que tu ressemble vachement à quelqu'un qui aurait déjà répondu quand même.</p>
                     </Message>
                     : ''
                 }
@@ -123,10 +122,14 @@ function Home() {
                     </form>
                     : ''
                 }
-
-                <Button icon circular className="Home-questions_button">
+                {data ?
+                <Button icon circular className="Home-questions_button" as='a' href={`/question/${data.data.id}`}>
                     <Icon name="ellipsis horizontal" />
                 </Button>
+                : <Button icon circular className="Home-questions_button" as='a'>
+                    <Icon name="ellipsis horizontal" />
+                </Button>
+                }
             </Segment>
 
             {questionsList? (
