@@ -16,9 +16,20 @@
     margin-bottom: 2rem;
     font-family: $base-font !important;
 }
+.Home-title{
+    font-size: medium !important;
+    font-weight: normal !important;
+}
+
+.Home-top_question-para{
+    font-size: x-large !important;
+    font-weight: bold !important;
+}
 
 .Home-top_question-title{
+    font-size: large !important;
     font-family: $base-font !important;
+    color: $primary-color !important;
 }
 
 .Home-questions {

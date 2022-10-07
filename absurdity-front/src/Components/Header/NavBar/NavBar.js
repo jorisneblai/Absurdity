@@ -14,9 +14,9 @@ function NavBar() {
         const f = async () => {
             const newData = await authHeader('user');
             if (!newData) {
-                setIsLogged(false)
+                return
             } else {
-                setIsLogged(true)
+                return
             }
         }
         f();
@@ -39,12 +39,12 @@ function NavBar() {
                 >
                 </Menu.Item>
                     :
-                    <Menu.Item
+                    <Menu.Item id='NavBar-ButtonLogIn'
                         as={NavLink} to="/login"
                     >Se connecter
                     </Menu.Item>}
                 <Dropdown icon="bars" item direction="left" id='NavBar-ButtonDropdown'>
-                    <Dropdown.Menu>
+                    <Dropdown.Menu className='DropdownMenu'>
                         <Dropdown.Item as={NavLink} to="/">Accueil</Dropdown.Item>
                         <Dropdown.Item as={NavLink} to="/about">À propos</Dropdown.Item>
                         <Dropdown.Item as={NavLink} to="/cgu">CGU</Dropdown.Item>
