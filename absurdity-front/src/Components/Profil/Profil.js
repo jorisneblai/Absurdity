@@ -112,6 +112,7 @@ function Profil() {
                         fluid
                         onChange={(event) => {
                             setNewPseudo(event.target.value);
+                            console.log(newPseudo);
                         }}
                         >
                             Sauvegarder les modifications

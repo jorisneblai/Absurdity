@@ -9,7 +9,9 @@ import patchData from '../../Middlewares/PatchDataMiddleware';
 import {useNavigate} from 'react-router-dom';
 
 function Admin() {
+
     const navigate = useNavigate();
+
     const [connected, setConnected] = useState(false);
     const [questionsList, setQuestionsList] = useState(null);
     const [createdQuestion, setCreatedQuestion] = useState(null);
