@@ -1,4 +1,4 @@
-import { Input, Segment, Header, Button, Icon, Message } from 'semantic-ui-react';
+import { TextArea, Segment, Header, Button, Icon, Message } from 'semantic-ui-react';
 import './Home.scss';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
@@ -7,12 +7,16 @@ import authHeader from '../../Middlewares/AuthHeader';
 import sendDataMiddleware from '../../Middlewares/SendDataMiddleware';
 import PreviousQuestion from './PreviousQuestion/PreviousQuestion';
 
-const USER_REGEX = /^[A-z][A-z0-9-_ ]{1,250}$/;
+const WHITESPACE_REGEX = /.*\S.*/;
+const LENGTH_REGEX = /^.{1,250}$/
+
 
 function Home() {
     const [data, setData] = useState(null);
     const [connected, setConnected] = useState(false);
-    const [value, setValue] = useState('')
+    const [value, setValue] = useState('');
+    const [validWhitespace, setValidWhitespace] = useState(false);
+    const [validLength, setValidLength] = useState(false);
     const [answered, setAnswered] = useState(null);
     const [questionsList, setQuestionsList] = useState(null);
     /*
@@ -51,6 +55,11 @@ function Home() {
         }
         allQuestions();
     }, []);
+
+    useEffect(() => {
+        setValidWhitespace(WHITESPACE_REGEX.test(value));
+        setValidLength(LENGTH_REGEX.test(value));
+    }, [value])
 
     function sendAnswer() {
         const trySendAnswer = async () => {
@@ -105,13 +114,14 @@ function Home() {
                 }
                 {answered === null ?
                     <form
+
                         className="Home-form"
                         onSubmit={(event) => {
                             event.preventDefault();
                             sendAnswer();
                         }}>
 
-                        <Input
+                        <TextArea className="TextArea-Home"
                             action={{ icon: "arrow alternate circle right" }}
                             placeholder='Écrivez votre réponse...'
                             disabled={connected ? false : true}
@@ -119,8 +129,11 @@ function Home() {
                             onChange={(event) => {
                                 setValue(event.target.value);
                             }}
-                            fluid
+                            maxLength="250"
                         />
+                        <Button className='TextArea-Send' disabled={connected && validWhitespace && validLength ? false : true}><Icon name='arrow alternate circle right'/></Button>
+                            
+                        
                     </form>
                     : ''
                 }
