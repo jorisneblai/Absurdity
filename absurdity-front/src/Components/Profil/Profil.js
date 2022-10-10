@@ -79,7 +79,7 @@ function Profil() {
               console.log("Profil non supprimée");
           } else {
               console.log("Profil supprimée");
-              cookies.remove('user');
+              cookies.remove('user', { path: '/' ,domain: 'localhost'});
               //localStorage.removeItem('user');
               navigate('/');
           }

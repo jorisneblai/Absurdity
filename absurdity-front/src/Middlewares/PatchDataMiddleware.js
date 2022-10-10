@@ -19,7 +19,7 @@ import Cookies from 'universal-cookie';
       console.log('Content modified', response.data)
       if (response.data.data && response.data.data.token) {
         console.log('ici')
-        cookies.set("user", response.data.data.token);
+        cookies.set("user", response.data.data.token, { path: '/' });
       }
       return response.data;
     } else {

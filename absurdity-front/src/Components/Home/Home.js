@@ -7,6 +7,8 @@ import authHeader from '../../Middlewares/AuthHeader';
 import sendDataMiddleware from '../../Middlewares/SendDataMiddleware';
 import PreviousQuestion from './PreviousQuestion/PreviousQuestion';
 
+const USER_REGEX = /^[A-z][A-z0-9-_ ]{1,250}$/;
+
 function Home() {
     const [data, setData] = useState(null);
     const [connected, setConnected] = useState(false);

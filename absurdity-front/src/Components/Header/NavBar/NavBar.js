@@ -25,8 +25,9 @@ function NavBar() {
 
 
     function logOut() {
-        cookies.remove('user');
-        window.location.reload();
+        console.log(cookies.getAll())
+        cookies.remove('user', {path: '/', domain: 'localhost'});
+         window.location.reload();
     };
 
     return (
@@ -47,10 +48,13 @@ function NavBar() {
                         <Dropdown.Item as={NavLink} to="/">Accueil</Dropdown.Item>
                         <Dropdown.Item as={NavLink} to="/about">À propos</Dropdown.Item>
                         <Dropdown.Item as={NavLink} to="/cgu">CGU</Dropdown.Item>
-                        {isLoggedMiddleware() 
+                        {isLoggedMiddleware()
                             ? <Dropdown.Item
                                 id='LogOutButton'
-                                onClick={() => logOut()}
+                                onClick={(event) => {
+                                    event.preventDefault();
+                                    logOut()
+                                }}
                             >
                                 Se déconnecter
                             </Dropdown.Item>
