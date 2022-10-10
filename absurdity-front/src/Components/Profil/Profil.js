@@ -1,19 +1,25 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import authHeader from '../../Middlewares/AuthHeader';
-import { Input, Label, Divider, Button } from 'semantic-ui-react';
+import { Input, Label, Divider, Button, Confirm } from 'semantic-ui-react';
 import './Profil.scss';
 import patchData from '../../Middlewares/PatchDataMiddleware';
 import DeleteDataMiddleware from '../../Middlewares/DeleteDataMiddleware';
 import Cookies from 'universal-cookie';
+
+const USER_REGEX = /^[A-z][A-z0-9-_]{3,24}$/;
+const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,24}$/;
 
 function Profil() {
     const cookies = new Cookies();
     const navigate = useNavigate();
     const [data, setData] = useState(null);
     const [newPseudo, setNewPseudo] = useState(false);
-    const [valuePseudo, setValuePseudo] = useState('');
-    const [valuePassword, setValuePassword] = useState('');
+    const [valuePseudo, setValuePseudo] = useState(undefined);
+    const [valuePassword, setValuePassword] = useState(undefined);
+    const [openModal, setOpenModal] = useState(false);
+    const [validName, setValidName] = useState(false);
+    const [validPassword, setValidPassword] = useState(false);
    
 
     useEffect(() => {
@@ -28,6 +34,24 @@ function Profil() {
         f();
     }, [navigate]);
 
+    useEffect(() => {
+        if (valuePseudo === undefined) {
+            setValidName(true);
+        }
+        else {
+            setValidName(USER_REGEX.test(valuePseudo));
+        }
+    }, [valuePseudo])
+
+    useEffect(() => {
+        if (valuePassword === undefined) {
+            setValidPassword(true);
+        }
+        else {
+            setValidPassword(PWD_REGEX.test(valuePassword));
+        }
+    }, [valuePassword])
+
     function updateProfil(pseudo, password) {
         const updatePseudo = async () => {
             const content = { pseudo, password };
@@ -39,8 +63,9 @@ function Profil() {
                 console.log('Pseudo or pwd modified')
                 setNewPseudo(true);
                 console.log(newPseudo);
-                setValuePseudo('');
-                setValuePassword('');
+                console.log(pseudo, password)
+                setValuePseudo(undefined);
+                setValuePassword(undefined);
                 window.location.reload();
             }
         }
@@ -78,8 +103,8 @@ function Profil() {
                     className="Profil-inputs"
                     onSubmit={(event) => {
                         event.preventDefault();
-                        const data = new FormData(event.target);
-                        updateProfil(data.get("pseudo"), data.get("password"));
+                        setOpenModal(true);
+                       
                     }}>
                     <Input 
                         className='Pseudo-input' 
@@ -110,13 +135,26 @@ function Profil() {
                     <Divider />
                     <Button 
                         fluid
-                        onChange={(event) => {
+                        disabled={!validName || !validPassword ? true : false
+                    }
+                        onClick={(event) => {
                             setNewPseudo(event.target.value);
                             console.log(newPseudo);
                         }}
                         >
                             Sauvegarder les modifications
                     </Button>
+                    <Confirm
+                        open={openModal}
+                        cancelButton='Mmmm...Finalement non'
+                        confirmButton="Allez, changeons tout ça!"
+                        onCancel={() => {setOpenModal(false)}}
+                        onConfirm={(event) => {
+                            event.preventDefault();
+                            updateProfil(valuePseudo, valuePassword);
+                       }}
+                        
+                      />
                 </form>
                     <Button 
                         circular

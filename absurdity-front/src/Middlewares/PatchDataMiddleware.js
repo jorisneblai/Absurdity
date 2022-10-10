@@ -18,6 +18,7 @@ import Cookies from 'universal-cookie';
     if (response.data.queryStatus) {
       console.log('Content modified', response.data)
       if (response.data.data && response.data.data.token) {
+        console.log('ici')
         cookies.set("user", response.data.data.token);
       }
       return response.data;
