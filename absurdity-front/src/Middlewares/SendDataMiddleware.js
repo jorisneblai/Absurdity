@@ -14,6 +14,7 @@ import Cookies from 'universal-cookie';
       headers: { 'Content-Type': 'application/json' },
     }
   ).then((response) => {
+    console.log(response.data)
     if (response.data.queryStatus) {
       return true;
     } else {

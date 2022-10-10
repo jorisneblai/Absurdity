@@ -13,7 +13,6 @@ import Cookies from 'universal-cookie';
    const data = await axios.get(`${baseURL}${route}?token=${token}`
 
   ).then((response) => {
-    console.log(response)
     if (response.data.queryStatus) {
       return response.data;
     } else {
