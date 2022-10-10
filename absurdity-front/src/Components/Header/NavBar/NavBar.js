@@ -2,12 +2,11 @@ import './NavBar.scss';
 import { Menu, Dropdown } from 'semantic-ui-react';
 import { NavLink } from 'react-router-dom';
 import authHeader from '../../../Middlewares/AuthHeader';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import isLoggedMiddleware from '../../../Middlewares/isLoggedMiddleware';
 import Cookies from 'universal-cookie';
 
 function NavBar() {
-    const [isLogged, setIsLogged] = useState(false);
     const cookies = new Cookies();
 
     useEffect(() => {
@@ -21,7 +20,7 @@ function NavBar() {
         }
         f();
 
-    }, [isLogged]);
+    }, []);
 
 
 
