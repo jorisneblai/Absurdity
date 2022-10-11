@@ -43,6 +43,7 @@ function Question() {
             if (!newData) {
                 setData(null)
             } else {
+                console.log('des données', newData)
                 setData(newData);
             }
         }
@@ -51,6 +52,8 @@ function Question() {
 
 
     }, [location]);
+
+   
 
     function voteAnswer(path, Id) {
 

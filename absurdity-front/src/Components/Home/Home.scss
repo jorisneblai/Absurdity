@@ -22,13 +22,13 @@
 }
 
 .Home-top_question-para{
-    font-size: x-large !important;
-    font-weight: bold !important;
+    font-family: $bold-font !important;
+    font-size: xx-large !important;
 }
 
 .Home-top_question-title{
-    font-size: large !important;
-    font-family: $base-font !important;
+    font-size: x-large !important;
+    font-family: $bold-font !important;
     color: $primary-color !important;
 }
 
@@ -91,7 +91,7 @@ li {
 // }
 
 .TextArea-Home {
-    font-size: medium;
+    font-size: small;
     resize: inherit;
     width: 90%
 }
