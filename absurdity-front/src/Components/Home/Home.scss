@@ -90,3 +90,18 @@ li {
 //     text-align: left;
 // }
 
+.TextArea-Home {
+    font-size: medium;
+    resize: inherit;
+    width: 90%
+}
+.TextArea-Send {
+    width:10%;
+    padding: 0;
+    margin: 0;
+}
+
+.Home-form {
+    display:flex;
+    flex-direction: row;
+}
