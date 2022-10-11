@@ -36,9 +36,9 @@ function Admin() {
           const newDataQuestions = await getData('admin/questions');
           if (!newDataQuestions) {
               setQuestionsList(null);
+              navigate('/');
           } else {
-              setQuestionsList(newDataQuestions);
-            console.log(newDataQuestions);
+            setQuestionsList(newDataQuestions);
           }
       }
       allQuestions();
