@@ -88,7 +88,7 @@ function Home() {
                     {!data ? "Loading..." : data.data.content}
                 </p>
                 {answered === true ?
-                    <Message positive>
+                    <Message positive className='Home-PositiveMessage'>
                         <Message.Header>Votre réponse a bien été envoyée!</Message.Header>
                         <p>
                             On sait pas où, mais...elle a été envoyée...
@@ -97,14 +97,14 @@ function Home() {
                     : ''
                 }
                 {answered === false && connected ?
-                    <Message negative >
+                    <Message negative className='Home-PositiveMessage' >
                         <Message.Header>Euh, attends t'as pas déjà répondu toi ?</Message.Header>
                         <p>Parce que tu ressemble vachement à quelqu'un qui aurait déjà répondu quand même.</p>
                     </Message>
                     : ''
                 }
                 {answered === false && !connected ?
-                    <Message negative >
+                    <Message negative className='Home-PositiveMessage' >
                         <Message.Header>Hop, hop, hop, papier du véhicule</Message.Header>
                         <p>(ou un pot de vin)</p>
                         <Link className='Link-Login' to='login'>Ici pour faire la carte grise</Link>
@@ -130,7 +130,7 @@ function Home() {
                             }}
                             maxLength="250"
                         />
-                        <Button className='TextArea-Send' disabled={connected && validWhitespace && validLength ? false : true}><Icon name='arrow alternate circle right'/></Button>
+                        <Button icon='angle right' className='TextArea-Send' disabled={connected && validWhitespace && validLength ? false : true}></Button>
                             
                         
                     </form>
