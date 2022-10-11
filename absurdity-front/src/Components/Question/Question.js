@@ -1,4 +1,4 @@
-import { Segment, Divider, Label } from 'semantic-ui-react';
+import { Segment, Divider, Label, Button, Icon } from 'semantic-ui-react';
 import './Question.scss';
 import { useEffect, useState } from 'react';
 import authHeader from '../../Middlewares/AuthHeader';
@@ -26,14 +26,15 @@ function Question() {
         }
         connect();
 
-        const alreadyVoted = async() => {
+        const alreadyVoted = async () => {
             const path = location.pathname.slice(10);
             const newData = await getData(`alreadyvoted/${path}`);
             if (!newData) {
-               console.log('pas voté')
+                console.log('pas voté')
             } else {
-            setAnsweredResponse(newData.data.answer_id)
-        }}
+                setAnsweredResponse(newData.data.answer_id)
+            }
+        }
         alreadyVoted();
 
         const f = async () => {
@@ -52,7 +53,7 @@ function Question() {
     }, [location]);
 
     function voteAnswer(path, Id) {
-       
+
         const connect = async () => {
             const content = {};
             content.questionId = Id;
@@ -70,14 +71,14 @@ function Question() {
                         window.location.reload();
                     }
                 }
-                f(); 
+                f();
             }
         }
         connect();
     }
 
     function deVoteAnswer(path, Id) {
-        
+
         const connect = async () => {
             const content = {};
             content.questionId = Id;
@@ -113,7 +114,7 @@ function Question() {
                 className="Questions-label"
             >
                 Top réponses
-                
+
             </Label>
 
             {!data ? '' : (
@@ -124,15 +125,24 @@ function Question() {
                                 <p><strong>{answer.pseudo}:</strong></p>
                                 <p>{answer.answer}</p>
                                 {connected && answer.answer_id === answeredResponse
-                                    ? <ButtonVote answer={answer} voteclass='Question-answer_Button voted'  voteAnswer={(answerId) => {
+                                    ? <ButtonVote answer={answer} voteclass='Question-answer_Button voted' voteAnswer={(answerId) => {
                                         deVoteAnswer(answerId, data.data.question_id);
-                                    }}/>
-                                    : ''
+                                    }} />
+                                    :  connected && answeredResponse !==  null
+                                        ?   <Button
+                                                className='Question-answer_Button unvoted'
+                                                size='mini'
+                                                disabled>
+                                                <Icon name='thumbs up' /><p>{answer.vote}</p>
+                                            </Button> 
+                                        : ''
+                                      
                                 }
+
                                 {connected && answeredResponse === null
-                                    ? <ButtonVote answer={answer} voteclass='Question-answer_Button unvoted'  voteAnswer={(answerId) => {
+                                    ? <ButtonVote answer={answer} voteclass='Question-answer_Button unvoted' voteAnswer={(answerId) => {
                                         voteAnswer(answerId, data.data.question_id);
-                                    }}/>
+                                    }} />
                                     : ''
                                 }
 
