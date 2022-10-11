@@ -1,0 +1,48 @@
+@import '../../index.scss';
+.About-main {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    align-content: space-evenly;
+ p {
+     font-size: large;
+ }
+}
+.container.About-bio > h1 {
+    font-size: xxx-large;
+    font-family: $base-font;
+    text-transform:uppercase;
+}
+
+.ui.container.Trombi{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    .card {
+        max-width: 200px;
+    }
+}
+.ui.card:first-child, .ui.card:last-child {
+    display: none;
+}
+
+
+.ui .card {
+    margin: 1rem 0;
+}
+
+@media only screen and (min-width: 1200px){
+    .ui.container {
+        margin-left: auto!important;
+        margin-right: auto!important;
+
+    }
+}
+    
+
+#root > main > main > div.ui.container.Trombi > div > div.content > div.header {
+    font-family: $base-font !important;
+}

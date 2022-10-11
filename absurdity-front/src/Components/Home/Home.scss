@@ -1,0 +1,92 @@
+@import "../../index.scss";
+.Home {
+    max-width: 40%;
+    margin: 0 auto;
+    text-align: center;
+}
+@media screen and (max-width: 900px){
+    .Home {
+        max-width: 90%;
+    }
+}
+
+.Home-title,
+.Home-top_question,
+.Home-questions {
+    margin-bottom: 2rem;
+    font-family: $base-font !important;
+}
+.Home-title{
+    font-size: medium !important;
+    font-weight: normal !important;
+}
+
+.Home-top_question-para{
+    font-size: x-large !important;
+    font-weight: bold !important;
+}
+
+.Home-top_question-title{
+    font-size: large !important;
+    font-family: $base-font !important;
+    color: $primary-color !important;
+}
+
+.Home-questions {
+    position: relative;
+    text-align: left;
+
+}
+
+.Home-questions_title {
+    margin: 0 auto;
+}
+
+.Home-questions_button {
+    position: absolute;
+    bottom: 6px;
+    right: 2px;
+}
+#root > main > main > div > button {
+    color: rgba($base-color-dark , .8);
+    background: rgba($base-color , .2);
+    box-shadow: 0px 0px 2px rgba($base-color-dark , .5) ;
+    transition: box-shadow .5s, background-color .3s, color .3s;
+}
+
+#root > main > main > div > button:hover {
+    color:$base-color-dark ;
+    background-color: rgba($white-color , .5);
+    box-shadow: 0px 0px 4px rgba($base-color-dark , .5) ;
+}
+
+.Home-form {
+    max-width: 60%;
+    margin: 0 auto;
+}
+
+#root > main > main > div > form > div > input[type=text] {
+    font-family: $base-font !important;
+}
+
+#root > main > main > div.ui.segment.Home-top_question > div > a {
+    color: darkred;
+    text-decoration: underline;
+}
+
+.segment.Home-top_question {
+    background: linear-gradient(to bottom ,rgba($base-color , .05), rgba($base-color , .15));
+    border-radius: 10px;
+    box-shadow: 0px 1px 2px rgba($base-color-dark , .5) ;
+    border-style:none
+}
+
+li {
+    padding-bottom: 1rem;
+}
+
+// .Home-questions_label,
+// .Home-questions_answer {
+//     text-align: left;
+// }
+

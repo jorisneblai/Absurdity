@@ -1,0 +1,31 @@
+div.ui.segment.Questions {
+    max-width: 40%;
+    margin: 0 auto;
+}
+@media screen and (max-width: 900px){
+    div.ui.segment.Questions {
+        max-width: 90%;
+    }
+}
+
+.Question-title {
+    font-size: x-large;
+}
+
+.Question-answer {
+    display: flex;
+    flex-direction: column;
+    .Question-answer_Button {
+        display: flex;
+        flex-direction: row;
+        max-width: fit-content;
+        margin-bottom: .5rem;
+    }
+}
+
+#root > main > div.ui.segment.Questions > ul > li > button.Question-answer_Button.voted {
+    background-color: rgb(121, 121, 204) !important;
+}
+#root > main > div.ui.segment.Questions > ul > li > button.Question-answer_Button.unvoted {
+    background-color: rgb(192, 192, 192);
+}

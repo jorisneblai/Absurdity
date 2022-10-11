@@ -1,0 +1,19 @@
+@import '../../index.scss';
+
+.Terms{
+
+    .ui.dividing.header {
+        font-size: xxx-large;
+        font-family: $base-font;
+        text-transform: uppercase;
+    }
+
+    .article-header{
+        padding-bottom: 1rem;
+        font-family: $base-font;
+    }
+    
+    p {
+        font-size: large;
+    }
+}

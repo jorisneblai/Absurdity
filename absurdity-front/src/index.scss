@@ -1,0 +1,29 @@
+@font-face {
+  font-family: 'Varela_Round';
+  src: url(./assets/font/VarelaRound-Regular.ttf) format('truetype');
+}
+
+$base-color: rgb(255, 255, 255);
+$base-color-dark: #000000;
+$white-color: #fff;
+$lightgrey-color: rgb(211, 211, 211); 
+$black-color: #000;
+$background-color: #ffffff;
+
+$primary-color: #569bdb;
+$secondary-color: #4f88bd;
+
+$base-font: 'Varela_Round';
+
+body {
+  margin: 0;
+  font-family: $base-font !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: $background-color;
+}
+
+code {
+  font-family: $base-font;
+}
+
