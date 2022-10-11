@@ -1,6 +1,10 @@
 @font-face {
-  font-family: 'Varela_Round';
-  src: url(./assets/font/VarelaRound-Regular.ttf) format('truetype');
+  font-family: 'Nunito';
+  src: url(./assets/font/Nunito-Regular.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Nunito-Bold';
+  src: url(./assets/font/Nunito-ExtraBold.ttf) format('truetype');
 }
 
 $base-color: rgb(255, 255, 255);
@@ -13,7 +17,8 @@ $background-color: #ffffff;
 $primary-color: #569bdb;
 $secondary-color: #4f88bd;
 
-$base-font: 'Varela_Round';
+$base-font: 'Nunito';
+$bold-font: 'Nunito-Bold';
 
 body {
   margin: 0;

@@ -50,7 +50,6 @@ function Home() {
                 setQuestionsList(null)
             } else {
                 setQuestionsList(newData);
-
             }
         }
         allQuestions();
