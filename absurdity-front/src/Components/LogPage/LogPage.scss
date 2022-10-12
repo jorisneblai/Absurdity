@@ -4,8 +4,130 @@
     background-color: #fff;
     max-width: 450px;
     margin: 0 auto;
+
+    border-style: hidden;
+    background-color: $base-color;
+    border-radius: 10px;
+    box-shadow: 0px 1px 3px 3px rgba($secondary-color , .4) ;
+    border-style:none;
+    transition: box-shadow .3s;
+
+}
+
+.LogPage:hover {
+        box-shadow: 0px 1px 6px 3px rgba($secondary-color , .3) ;
+    
 }
 
 #root > main > section > nav > div > a{
     font-family: $base-font !important;
+}
+
+#root > main > section > nav > div {
+    border:none; 
+}
+
+.ui.tabular.menu .active.item {
+    border:none;
+    background-color: transparent;
+}
+
+#Button-inscription, #Button-connexion {
+    border:none;
+    border-radius:0px;
+    background-color: $background-color;
+}
+#Button-inscription.active, #Button-connexion.active {
+    border:none;
+    border-radius: 0px;
+    background-color: $base-color;
+}
+#Button-connexion.active {
+    border-bottom-left-radius: 0px !important;
+    border-top-left-radius: 0px !important;
+}
+#Button-inscription.active {
+    border-bottom-right-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+}
+#Button-inscription {
+
+    border-top-left-radius: 10px !important;
+}
+#Button-connexion {
+    border-top-right-radius: 10px !important;
+}
+#Button-inscription {
+    border-top-left-radius: 10px;
+}
+#Button-connexion {
+    border-top-right-radius: 10px;
+}
+#Button-inscription:hover, #Button-connexion:hover {
+    background-color: $lightgrey-color;
+    border:none;
+}
+#Button-inscription.active:hover, #Button-connexion.active:hover {
+    border:none;
+    border-radius: 0px;
+    background-color: $base-color;
+}
+
+.LogFormLogIn, .LogFormSignUp {
+    border: none;
+}
+#root > main > section > div > section > h1 {
+    text-align: center;
+    font-family: $bold-font;
+}
+
+.ui.tabular.fluid.menu {
+    background-color: $background-color;
+    border-radius: 10px;
+    width: 100% !important;
+
+}
+.ui.tabular.fluid.menu:hover {
+    background-color: $lightgrey-color;
+}
+
+.Input-LogLabel {
+    margin-bottom: .5rem;
+}
+.Input-Log {
+    border: 1px solid $lightgrey-color;
+
+}
+.Input-Log:focus-visible, .Input-Log:focus {
+    border: $base-color solid 1px;
+    outline: 1px solid $primary-color;
+    
+}
+
+@media screen and (max-width: 900px) {
+    .LogPage {
+        max-width: 80%;
+    }
+}
+
+.Submit-button {
+    max-width: fit-content;
+    padding: .8rem 1rem;
+    margin: 2rem auto 0;
+    border:none;
+    border-radius: 10px;
+    background-color: $primary-color;
+    color: $base-color;
+    transition: background-color .5s;
+}
+
+.Submit-button:disabled {
+    background-color: rgba($primary-color, .3);
+}
+.Submit-button:hover:disabled {
+    background-color: rgba($primary-color, .3);
+}
+
+.Submit-button:hover {
+    background-color: $secondary-color;
 }

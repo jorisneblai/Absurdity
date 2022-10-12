@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import './LogFormSignUp.scss';
 import axios from 'axios';
 import authHeader from '../../../Middlewares/AuthHeader';
@@ -9,8 +9,7 @@ const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,24}$/;
 
 function LogFormSignUp() {
 
-    const userRef = useRef();
-    const errRef = useRef();
+
     const baseURL = process.env.REACT_APP_API_URL;
     const navigate = useNavigate()
 
@@ -39,7 +38,7 @@ function LogFormSignUp() {
         }
         f();
 
-        userRef.current.focus();
+
     }, [navigate]);
 
     useEffect(() => {
@@ -88,7 +87,6 @@ function LogFormSignUp() {
             } else {
                 setErrMsg("Échec de la connexion")
             }
-            errRef.current.focus();
         }
     }
     return (
@@ -101,17 +99,18 @@ function LogFormSignUp() {
                 </section>
             ) : (
                 <section>
-                    <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
+                    <p className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
                     <h1>S'inscrire</h1>
+                    <div className='Divider-Question'/>
                     <form onSubmit={handleSubmit}>
 
-                        <label htmlFor="username">
+                        <label className='Input-LogLabel' htmlFor="username">
                             E-Mail
                         </label>
                         <input
+                        className='Input-Log'
                             type="email"
                             id="email"
-                            ref={userRef}
                             autoComplete="off"
                             onChange={(event) => setEmail(event.target.value)}
                             value={email}
@@ -119,10 +118,11 @@ function LogFormSignUp() {
 
                         />
 
-                        <label htmlFor="username">
+                        <label className='Input-LogLabel' htmlFor="username">
                             Pseudo <p className="AdvicesSignUp">(entre 4 et 24 caractères et commençant par une lettre)</p>
                         </label>
                         <input
+                        className='Input-Log'
                             type="text"
                             id="username"
                             autoComplete="off"
@@ -131,10 +131,11 @@ function LogFormSignUp() {
                             required
                         />
 
-                        <label htmlFor="password">
+                        <label className='Input-LogLabel' htmlFor="password">
                             Mot de passe <p className="AdvicesSignUp">(entre 8 et 24 caractères dont au moins 1 majuscule, 1 minuscule et un chiffre)</p>
                         </label>
-                        <input
+                        <input 
+                        className='Input-Log'
                             type="password"
                             id="password"
                             onChange={(event) => setPwd(event.target.value)}
@@ -142,10 +143,11 @@ function LogFormSignUp() {
                             required
                         />
 
-                        <label htmlFor="confirm_pwd">
+                        <label className='Input-LogLabel' htmlFor="confirm_pwd">
                             Confirmation du mot de passe
                         </label>
                         <input
+                        className='Input-Log'
                             type="password"
                             id="confirm_pwd"
                             onChange={(event) => setMatchPwd(event.target.value)}
@@ -153,7 +155,7 @@ function LogFormSignUp() {
                             required
                         />
 
-                        <button disabled={!validName || !validPwd || !validMatch  ? true : false}>S'inscrire</button>
+                        <button className='Submit-button' disabled={!validName || !validPwd || !validMatch  ? true : false}>S'inscrire</button>
                     </form>
                 </section>
             )}

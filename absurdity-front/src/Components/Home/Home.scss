@@ -17,6 +17,7 @@
     font-family: $base-font !important;
 }
 .Home-title{
+    margin: 2rem 0 !important;
     font-size: medium !important;
     font-weight: normal !important;
 }
@@ -24,6 +25,7 @@
 .Home-top_question-para{
     font-family: $bold-font !important;
     font-size: xx-large !important;
+    margin-bottom: .7rem;
 }
 
 .Home-top_question-title{
@@ -78,8 +80,14 @@
 .segment.Home-top_question {
     background-color: $base-color;
     border-radius: 10px;
-    box-shadow: 0px 1px 2px rgba($base-color-dark , .5) ;
-    border-style:none
+    border-bottom-right-radius: 25px;
+    box-shadow: 0px 1px 3px 3px rgba($secondary-color , .4) ;
+    border-style:none;
+    transition: box-shadow .3s;
+    margin-bottom: 2rem;
+}
+.segment.Home-top_question:hover {
+    box-shadow: 0px 1px 6px 3px rgba($secondary-color , .3) ;
 }
 
 li {
@@ -98,6 +106,15 @@ li {
     border: $base-color solid 1px;
     outline: 1px solid $primary-color;
     
+}
+.TextArea-Home::placeholder{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.TextArea-Home:focus::placeholder,.TextArea-Home:focus-visible::placeholder{
+    color:transparent
 }
 .TextArea-Send {
     width:10%;

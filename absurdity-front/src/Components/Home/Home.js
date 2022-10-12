@@ -82,7 +82,8 @@ function Home() {
             </Header>
             <Segment className="Home-top_question">
                 <Header className="Home-top_question-title" as="h2">
-                    Question du jour :
+                    Question du jour
+                    <div className='Divider-Question'/>
                 </Header>
                 <p className="Home-top_question-para">
                     {!data ? "Loading..." : data.data.content}
@@ -122,7 +123,7 @@ function Home() {
 
                         <TextArea className="TextArea-Home"
                             action={{ icon: "arrow alternate circle right" }}
-                            placeholder='Écrivez votre réponse...'
+                            placeholder='Pour répondre, connectez-vous...'
                             disabled={connected ? false : true}
                             value={value}
                             onChange={(event) => {
@@ -137,12 +138,10 @@ function Home() {
                     : ''
                 }
                 {data ?
-                <Button icon circular className="Home-questions_button" as='a' href={`/question/${data.data.id}`}>
+                <Button title='Voir les réponses' icon circular className="Home-questions_button" as='a' href={`/question/${data.data.id}`}>
                     <Icon name="ellipsis horizontal" />
                 </Button>
-                : <Button icon circular className="Home-questions_button" as='a'>
-                    <Icon name="ellipsis horizontal" />
-                </Button>
+                : ''
                 }
             </Segment>
 

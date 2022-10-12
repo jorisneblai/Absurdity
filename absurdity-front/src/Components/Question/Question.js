@@ -53,7 +53,7 @@ function Question() {
 
     }, [location]);
 
-   
+
 
     function voteAnswer(path, Id) {
 
@@ -111,41 +111,54 @@ function Question() {
             <p className="Question-title">
                 {!data ? '' : data.data.question}
             </p>
-            <Divider />
-            <Label
-                basic
-                className="Questions-label"
-            >
-                Top réponses
-
-            </Label>
+            <div className='Divider-Question' />
 
             {!data ? '' : (
                 <ul>{!data.data.list_answers[0].answer ? '' :
-                    data.data.list_answers.map((answer, key) => {
+                    data.data.list_answers.map((answer) => {
                         return (
                             <li className="Question-answer" key={answer.answer_id}>
-                                <p><strong>{answer.pseudo}:</strong></p>
-                                <p>{answer.answer}</p>
+                            <div className='Previous-question_header'>
+                                    <Icon
+                                        circular
+                                        className="Home-questions_label"
+                                        name="star outline"
+                                    >
+                                    </Icon>
+                            <p className="Home-questions_answer">
+                                        {answer.pseudo} :
+                                    </p>
+                                    </div>
+
+                                <p className='Question-answer_answer'>{answer.answer}</p>
                                 {connected && answer.answer_id === answeredResponse
                                     ? <ButtonVote answer={answer} voteclass='Question-answer_Button voted' voteAnswer={(answerId) => {
                                         deVoteAnswer(answerId, data.data.question_id);
                                     }} />
-                                    :  connected && answeredResponse !==  null
-                                        ?   <Button
-                                                className='Question-answer_Button unvoted'
-                                                size='mini'
-                                                disabled>
-                                                <Icon name='thumbs up' /><p>{answer.vote}</p>
-                                            </Button> 
+                                    : connected && answeredResponse !== null
+                                        ? <Button
+                                            className='Question-answer_Button unvoted'
+                                            size='mini'
+                                            disabled>
+                                            <Icon name='thumbs up' /><p>{answer.vote}</p>
+                                        </Button>
                                         : ''
-                                      
+
                                 }
 
                                 {connected && answeredResponse === null
                                     ? <ButtonVote answer={answer} voteclass='Question-answer_Button unvoted' voteAnswer={(answerId) => {
                                         voteAnswer(answerId, data.data.question_id);
                                     }} />
+                                    : ''
+                                }
+                                {!connected
+                                    ? <Button
+                                            className='Question-answer_Button unvoted'
+                                            size='mini'
+                                            disabled>
+                                            <Icon name='thumbs up' /><p>{answer.vote}</p>
+                                        </Button>
                                     : ''
                                 }
 
