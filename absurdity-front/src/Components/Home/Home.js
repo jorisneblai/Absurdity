@@ -100,7 +100,7 @@ function Home() {
                 {answered === false && connected ?
                     <Message negative className='Home-PositiveMessage' >
                         <Message.Header>Euh, attends t'as pas déjà répondu toi ?</Message.Header>
-                        <p>Parce que tu ressemble vachement à quelqu'un qui aurait déjà répondu quand même.</p>
+                        <p>Parce que vous ressemblez vachement à quelqu'un qui aurait déjà répondu quand même.</p>
                     </Message>
                     : ''
                 }

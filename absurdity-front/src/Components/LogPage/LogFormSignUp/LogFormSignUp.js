@@ -94,7 +94,7 @@ function LogFormSignUp() {
             {success ? (
                 <section className="ConfirmSignUpSection">
                     <h1>Vous êtes inscrit.e !</h1>
-                    <p>Plus qu'à se connecter !</p>
+                    <p>Vérifier votre boîte mail</p>
                     <p>(C'est la procédure standard)</p>
                 </section>
             ) : (
