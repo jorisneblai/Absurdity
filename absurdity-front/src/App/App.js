@@ -8,6 +8,7 @@ import ErrorPage from '../Components/404/404';
 import Terms from '../Components/Terms/Terms';
 import Profil from '../Components/Profil/Profil';
 import Admin from '../Components/Admin/Admin';
+import VerifyToken from '../Components/VerifyToken/VerifyToken';
 import { Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route path="/cgu" element={<><Header />  <Terms/></>} />
           <Route path="/profil" element={<><Header />  <Profil/></>} />
           <Route path="/admin" element={<><Header /> <Admin /></>} />
+          <Route path="/emailverify" element={<><Header /> <VerifyToken /></>} />
           <Route path="/*" element={<><Header /> <ErrorPage /></>} />
       </Routes>
     </main>

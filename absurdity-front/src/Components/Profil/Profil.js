@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import authHeader from '../../Middlewares/AuthHeader';
-import { Input, Label, Divider, Button, Confirm } from 'semantic-ui-react';
+import { Input, Label, Divider, Button, Confirm, Segment } from 'semantic-ui-react';
 import './Profil.scss';
 import patchData from '../../Middlewares/PatchDataMiddleware';
 import DeleteDataMiddleware from '../../Middlewares/DeleteDataMiddleware';
@@ -96,6 +96,7 @@ function Profil() {
     } else {
         return (  
             <main className="Profil">
+            <Segment className='Profil-segment'>
                 <h1 className="Profil-title">
                     Profil de {data.data.pseudo}
                 </h1>
@@ -165,6 +166,7 @@ function Profil() {
                         >
                             
                     </Button>
+                    </Segment>
             </main>
         );}
     }
