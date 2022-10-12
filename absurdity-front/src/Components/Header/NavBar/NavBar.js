@@ -26,7 +26,7 @@ function NavBar() {
 
     function logOut() {
         console.log(cookies.getAll())
-        cookies.remove('user', {path: '/', domain: 'localhost'});
+        cookies.remove('user', {path: '/', domain: 'absurdity.vercel.app'});
          window.location.reload();
     };
 
