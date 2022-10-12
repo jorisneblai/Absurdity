@@ -13,7 +13,7 @@ function LogPage(chosenPage) {
 
   return ( 
     <section className="LogPage">
-      <LogMenu func={pull_data}/>
+      <LogMenu className="LogMenu" func={pull_data}/>
       {logMenu === 'Inscription' ? <LogFormSignUp/> : ''}
       {logMenu === 'Connexion' ? <LogFormLogIn/> : ''}
       

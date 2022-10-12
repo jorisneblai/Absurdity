@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import './LogFormLogIn.scss';
 import axios from 'axios';
 import authHeader from '../../../Middlewares/AuthHeader';
@@ -6,8 +6,7 @@ import { useNavigate } from 'react-router';
 import Cookies from 'universal-cookie';
 
 const LogFormLogIn = () => {
-    const userRef = useRef();
-    const errRef = useRef();
+
     const baseURL = process.env.REACT_APP_API_URL;
     const navigate = useNavigate();
     const cookies = new Cookies();
@@ -30,7 +29,6 @@ const LogFormLogIn = () => {
             }
             f();
 
-        userRef.current.focus();
     }, [navigate]);
 
     useEffect(() => {
@@ -71,7 +69,6 @@ const LogFormLogIn = () => {
                 } else {
                     setErrMsg("Échec de la connexion");
                 }
-                errRef.current.focus();
             }
         }
     }
@@ -84,29 +81,32 @@ const LogFormLogIn = () => {
                 </section>
             ) : (
                 <section>
-                    <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
+                    <p className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
                     <h1>Se connecter</h1>
+                    <div className='Divider-Question'/>
                     <form onSubmit={handleSubmit}>
-                        <label htmlFor="username">Pseudo :</label>
+                        <label className='Input-LogLabel' htmlFor="username">Pseudo</label>
                         <input
+                        className='Input-Log'
                             type="text"
                             id="username"
-                            ref={userRef}
+                    
                             autoComplete="off"
                             onChange={(e) => setUser(e.target.value)}
                             value={user}
                             required
                         />
 
-                        <label htmlFor="password">Mot de passe :</label>
+                        <label className='Input-LogLabel' htmlFor="password">Mot de passe</label>
                         <input
+                        className='Input-Log'
                             type="password"
                             id="password"
                             onChange={(e) => setPwd(e.target.value)}
                             value={pwd}
                             required
                         />
-                        <button>
+                        <button className='Submit-button' disabled={pwd && user !== '' ? false : true}>
                             Se connecter
                         </button>
                     </form>

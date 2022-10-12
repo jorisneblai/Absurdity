@@ -1,7 +1,8 @@
 @import "../../../index.scss";
 #LogOutButton{
-    color: #690996 !important;
-
+    color: $secondary-color !important;
+    text-align: right;
+    font-family: $bold-font;
 }
 #NavBar-Menu {
     background-color: $background-color;
@@ -38,6 +39,19 @@
 #NavBar-ButtonDropdown {
     border-top-right-radius: 10px !important ;
     border-bottom-right-radius: 10px !important ;
+
+}
+#NavBar-ButtonDropdown > div {
+    margin-top: .3rem;
+    width: fit-content;
+    font-size: large;
+    border-radius: 10px;
+    background-color: $background-color;
+    box-shadow: 0 0 5px -3px $black-color;
+}
+#NavBar-ButtonDropdown > div >a {
+    text-align: right;
+    color: $black-color !important;
 }
 
 #NavBar-ButtonProfil > i,#NavBar-ButtonDropdown > i{
@@ -50,10 +64,6 @@
 #NavBar-ButtonLogIn.item {
     color: $base-color-dark;
 }
-
-
-
-
 
 #root > main > div > div > nav > div {
     font-family: $base-font !important;
