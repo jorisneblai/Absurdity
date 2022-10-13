@@ -12,27 +12,57 @@
     padding: 20px;
     font-size: 1.2rem;
 }
-
 .Pseudo-label {
-    padding: 20px;
-    font-size: 1.2rem;
+    width: 100%;
+    font-size: 1.5rem !important;
+    text-align: left;
+    margin-bottom: .5rem;
 }
 
 .Pseudo-input {
-    margin: 1rem auto;
-    max-width: 90%;
+    display: flex;
+    flex-direction: column;
+}
+
+.Pseudo-input > input{
+    width: 100%;
+    margin: 1rem ;
+    font-size: x-small !important;
+}
+.Pseudo-input > input[type=text]::placeholder {
+    font-size: 15px;
+    padding: 0;
+}
+.ui.input>input {
+    padding: .5rem;
+    
+}
+
+.Profil-title {
+    font-family: $bold-font;
 }
 
 .Pwd-label {
-    padding: 20px;
-    font-size: 1.2rem;
+    max-width: 100%;
+    text-align: left;
+    font-size: 1.5rem !important;
+    margin-bottom: .5rem;
 }
+.Pwd-input > input{
+    width: 100%;
+    margin: 1rem ;
+    font-size: x-small !important;
 
+}
 .Pwd-input {
-    margin: 0 auto;
-    max-width: 90%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
 }
-
+.Pwd-input > input[type=password]::placeholder {
+    font-size: 15px;
+    padding: 0;
+}
 .ui.segment.Profil-segment {
     background-color: $base-color;
     border-radius: 10px;
@@ -40,6 +70,7 @@
     border-style:none;
     transition: box-shadow .3s;
     margin-bottom: 2rem;
+    position: relative;
 }
 
 .ui.segment.Profil-segment:hover {
@@ -50,4 +81,35 @@
 .Profil{
     max-width: 80%;
 }
+}
+
+.AdvicesSignUp {
+    font-size: x-small;
+    text-align: left;
+}
+
+button#DeleteProfilButton {
+    width: 50%;
+    margin: 0 auto;
+    background-color: $danger-color !important;
+    border-radius: 10px;
+    box-shadow: none !important;
+    color: $base-color !important;
+    font-weight: 500;
+}
+button#DeleteProfilButton:hover {
+    background-color: $danger-color-hover !important;
+}
+
+button#UpdateProfilButton {
+    width: 50%;
+    margin: 0 auto;
+    background-color: $primary-color !important;
+    border-radius: 10px;
+    box-shadow: none !important;
+    color: $base-color !important;
+    font-weight: 500;
+}
+button#UpdateProfilButton:hover {
+    background-color: $secondary-color !important;
 }

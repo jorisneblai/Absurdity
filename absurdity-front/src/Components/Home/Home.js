@@ -78,7 +78,7 @@ function Home() {
     return (
         <main className="Home">
             <Header className="Home-title">
-                Il n'y a pas de question idiote, mais il y a des réponses absurdes.
+                Il n'y a pas de question idiote, que des réponses absurdes.
             </Header>
             <Segment className="Home-top_question">
                 <Header className="Home-top_question-title" as="h2">
@@ -86,7 +86,7 @@ function Home() {
                     <div className='Divider-Question'/>
                 </Header>
                 <p className="Home-top_question-para">
-                    {!data ? "Loading..." : data.data.content}
+                    {!data ? "Chargement des absurdités..." : data.data.content}
                 </p>
                 {answered === true ?
                     <Message positive className='Home-PositiveMessage'>
@@ -122,7 +122,6 @@ function Home() {
                         }}>
 
                         <TextArea className="TextArea-Home"
-                            action={{ icon: "arrow alternate circle right" }}
                             placeholder='Pour répondre, connectez-vous...'
                             disabled={connected ? false : true}
                             value={value}
@@ -131,15 +130,15 @@ function Home() {
                             }}
                             maxLength="250"
                         />
-                        <Button icon='angle right' className='TextArea-Send' disabled={connected && validWhitespace && validLength ? false : true}></Button>
+                        <Button icon='angle right' className={connected ?"TextArea-Disabled" : "TextArea-Send" } disabled={connected && validWhitespace && validLength ? false : true}></Button>
                             
                         
                     </form>
                     : ''
                 }
                 {data ?
-                <Button title='Voir les réponses' icon circular className="Home-questions_button" as='a' href={`/question/${data.data.id}`}>
-                    <Icon name="ellipsis horizontal" />
+                <Button title='Voir les super réponses' icon circular className="Home-questions_button" as='a' href={`/question/${data.data.id}`}>
+                    <Icon name="comment" />
                 </Button>
                 : ''
                 }
