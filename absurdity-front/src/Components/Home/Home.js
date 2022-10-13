@@ -78,7 +78,7 @@ function Home() {
     return (
         <main className="Home">
             <Header className="Home-title">
-                Absurdity, des vannes à toutes heures. L'absurdité dans toute sa Chandeleur.
+                Il n'y a pas de question idiote, mais il y a des réponses absurdes.
             </Header>
             <Segment className="Home-top_question">
                 <Header className="Home-top_question-title" as="h2">

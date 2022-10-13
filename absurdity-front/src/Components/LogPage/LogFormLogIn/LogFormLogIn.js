@@ -52,7 +52,7 @@ const LogFormLogIn = () => {
                 );
                 /* if with got a response stocking an access token, we put it in the Local Storage */
                 if (response.data) {
-                    cookies.set('user', response.data.data.token, { path: '/', domain: 'absurdity.vercel.app'});
+                    cookies.set('user', response.data.data.token, { path: '/', domain: '.absurdity.vercel.app'});
                    // localStorage.setItem("user", response.data.data.token);
                 }
                 setUser('');

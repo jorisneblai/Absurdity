@@ -79,7 +79,7 @@ function Profil() {
               console.log("Profil non supprimée");
           } else {
               console.log("Profil supprimée");
-              cookies.remove('user', { path: '/' ,domain: 'absurdity.vercel.app'});
+              cookies.remove('user', { path: '/' ,domain: '.absurdity.vercel.app'});
               //localStorage.removeItem('user');
               navigate('/');
           }
