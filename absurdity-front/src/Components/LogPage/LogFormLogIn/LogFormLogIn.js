@@ -4,6 +4,8 @@ import axios from 'axios';
 import authHeader from '../../../Middlewares/AuthHeader';
 import { useNavigate } from 'react-router';
 import Cookies from 'universal-cookie';
+const pathURL = process.env.REACT_APP_PATH;
+const domainURL = process.env.REACT_APP_DOMAIN;
 
 const LogFormLogIn = () => {
 
@@ -52,7 +54,7 @@ const LogFormLogIn = () => {
                 );
                 /* if with got a response stocking an access token, we put it in the Local Storage */
                 if (response.data) {
-                    cookies.set('user', response.data.data.token, { path: '/', domain: '.absurdity.vercel.app'});
+                    cookies.set('user', response.data.data.token, { path: pathURL, domain: domainURL});
                    // localStorage.setItem("user", response.data.data.token);
                 }
                 setUser('');

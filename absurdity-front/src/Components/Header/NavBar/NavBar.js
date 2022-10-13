@@ -5,6 +5,8 @@ import authHeader from '../../../Middlewares/AuthHeader';
 import { useEffect } from 'react';
 import isLoggedMiddleware from '../../../Middlewares/isLoggedMiddleware';
 import Cookies from 'universal-cookie';
+const pathURL = process.env.REACT_APP_PATH;
+const domainURL = process.env.REACT_APP_DOMAIN;
 
 function NavBar() {
     const cookies = new Cookies();
@@ -26,7 +28,7 @@ function NavBar() {
 
     function logOut() {
         console.log(cookies.getAll())
-        cookies.remove('user', {path: '/', domain: '.absurdity.vercel.app'});
+        cookies.remove('user', {path: pathURL, domain: domainURL});
          window.location.reload();
     };
 

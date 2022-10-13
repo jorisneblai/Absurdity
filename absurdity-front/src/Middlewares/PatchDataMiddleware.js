@@ -2,10 +2,12 @@
 
 import axios from 'axios';
 import Cookies from 'universal-cookie';
+const pathURL = process.env.REACT_APP_PATH;
+const domainURL = process.env.REACT_APP_DOMAIN;
 
  async function patchData(route, content){
   const cookies = new Cookies();
-  const token = cookies.get('user', { path: '/' ,domain: '.absurdity.vercel.app'}) || null;
+  const token = cookies.get('user', { path: pathURL ,domain: domainURL}) || null;
   if(token === null) {return false}
   const baseURL = process.env.REACT_APP_API_URL;
   
@@ -19,7 +21,7 @@ import Cookies from 'universal-cookie';
       console.log('Content modified', response.data)
       if (response.data.data && response.data.data.token) {
         console.log('ici')
-        cookies.set("user", response.data.data.token, { path: '/' ,domain: '.absurdity.vercel.app'});
+        cookies.set("user", response.data.data.token, { path: pathURL ,domain: domainURL});
       }
       return response.data;
     } else {

@@ -7,6 +7,9 @@ import patchData from '../../Middlewares/PatchDataMiddleware';
 import DeleteDataMiddleware from '../../Middlewares/DeleteDataMiddleware';
 import Cookies from 'universal-cookie';
 
+const pathURL = process.env.REACT_APP_PATH;
+const domainURL = process.env.REACT_APP_DOMAIN;
+
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,24}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,24}$/;
 
@@ -79,7 +82,7 @@ function Profil() {
               console.log("Profil non supprimée");
           } else {
               console.log("Profil supprimée");
-              cookies.remove('user', { path: '/' ,domain: '.absurdity.vercel.app'});
+              cookies.remove('user', { path: pathURL ,domain: domainURL});
               //localStorage.removeItem('user');
               navigate('/');
           }
