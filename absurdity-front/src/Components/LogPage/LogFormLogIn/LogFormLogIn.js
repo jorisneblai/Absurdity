@@ -81,9 +81,9 @@ const LogFormLogIn = () => {
         }
     }
 
-    function sendMail(mail) {
+    function sendMail(email) {
 
-        const content = {mail};
+        const content = {email};
          axios.post(`${baseURL}retrieve/password`,
                      JSON.stringify({ content }),
                      {
