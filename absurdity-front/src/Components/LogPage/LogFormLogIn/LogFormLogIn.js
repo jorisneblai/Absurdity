@@ -150,7 +150,7 @@ const LogFormLogIn = () => {
                                 />
                             </Modal.Actions>
                             : <Modal.Actions>
-                                <Button id='validModalButton' onClick={() => setOpenModal(false)}>
+                                <Button id='validModalButton' onClick={() =>{ setOpenModal(false); setMailsend(false)}}>
                                     Mail envoyé !
                                 </Button>
                             </Modal.Actions> }
