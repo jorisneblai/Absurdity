@@ -27,6 +27,7 @@ function Profil() {
 
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         const f = async () => {
             const newData = await authHeader('user');
             if (!newData) {

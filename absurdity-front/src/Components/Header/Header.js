@@ -21,9 +21,9 @@ function Header() {
             <Menu.Item position="right">
                 <NavBar />
             </Menu.Item>
-            
+            <div id='Divider-Header'></div>
         </Menu>
-        <div id='Divider-Header'></div>
+        
         </>
     )
 }

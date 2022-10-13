@@ -5,19 +5,21 @@
     border-bottom: none;
 }
 #Divider-Header{
-    z-index: 100;
-    position: fixed;
-    top:76px;
+    z-index: 1;
+    position: absolute;
+    bottom:-10px;
     width:98%;
     margin-left:1%;
-    border: 10px solid $primary-color;
+    border: 5px solid $primary-color;
     border-radius: 15px;
 }
 
 #root > main > div > a{
     background-color: $background-color;
 }
-
+.ui.menu .item {
+    padding:.7rem;
+}
 .ui.menu .item>img:not(.ui) {
     width: 8rem;
 }

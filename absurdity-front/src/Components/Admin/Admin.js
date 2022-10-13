@@ -20,6 +20,7 @@ function Admin() {
     const [patchValue, setPatchValue] = useState('');
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         const connect = async () => {
             const newData = await authHeader('user');
             if (!newData) {

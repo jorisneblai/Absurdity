@@ -1,4 +1,4 @@
-import { Segment, Divider, Label, Button, Icon } from 'semantic-ui-react';
+import { Segment, Button, Icon } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import './PreviousQuestion.scss';

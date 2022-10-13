@@ -25,6 +25,7 @@ function Home() {
     const [ topQuestion, setTopQuestion ] = useState(null);
     */
     useEffect(() => {
+        window.scrollTo(0, 0);
         const connect = async () => {
             const newData = await authHeader('user');
             if (!newData) {

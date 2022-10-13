@@ -1,4 +1,4 @@
-import { Segment, Divider, Label, Button, Icon } from 'semantic-ui-react';
+import { Segment, Divider, Button, Icon } from 'semantic-ui-react';
 import './Question.scss';
 import { useEffect, useState } from 'react';
 import authHeader from '../../Middlewares/AuthHeader';
@@ -15,6 +15,7 @@ function Question() {
     const [answeredResponse, setAnsweredResponse] = useState(null);
 
     useEffect(() => {
+        window.scrollTo(0, 0);
 
         const connect = async () => {
             const newData = await authHeader('user');

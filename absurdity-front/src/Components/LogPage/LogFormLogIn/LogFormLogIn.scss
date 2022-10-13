@@ -90,3 +90,20 @@ button {
 .line {
     display: inline-block;
 }
+
+#validModalButton {
+    background-color: $primary-color;
+}
+
+#block_modal {
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+#block_modal > input {
+    margin-top: 1rem;
+    width: 80%;
+}
+#block_modal > label {
+    font-size: large;
+}

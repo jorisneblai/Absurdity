@@ -27,6 +27,7 @@ function LogFormSignUp() {
     const [success, setSuccess] = useState(false);
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         const f = async () => {
             const newData = await authHeader('checkuser');
             if (!newData) {
