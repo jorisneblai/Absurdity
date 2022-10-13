@@ -18,8 +18,10 @@ const LogFormLogIn = () => {
     const [pwd, setPwd] = useState('');
     const [errMsg, setErrMsg] = useState('');
     const [forgottenMail, setForgottenMail] = useState('');
+    const [mailsend, setMailsend] = useState(false);
     const [success, setSuccess] = useState(false);
     const [openModal, setOpenModal] = useState(false);
+
 
     /* This useEffect have a navigate dependency so it can use useNavigate Hook */
     useEffect(() => {
@@ -88,6 +90,8 @@ const LogFormLogIn = () => {
                          headers: { 'Content-Type': 'application/json' },
                      }
          );
+
+         setMailsend(true);
     }
 
     return (
@@ -131,7 +135,7 @@ const LogFormLogIn = () => {
                             placeholder='Entrez votre adresse mail'
                             name="forgottenmail"
                             autoComplete="off" /></div>
-
+                            {!mailsend ?
                             <Modal.Actions>
                                 <Button color='black' onClick={() => setOpenModal(false)}>
                                     Nan c'est bon je m'en suis souvenu
@@ -145,6 +149,11 @@ const LogFormLogIn = () => {
                                     positive
                                 />
                             </Modal.Actions>
+                            : <Modal.Actions>
+                                <Button id='validModalButton' onClick={() => setOpenModal(false)}>
+                                    Mail envoyé !
+                                </Button>
+                            </Modal.Actions> }
 
                         </Modal>
                         <button className='Submit-button' disabled={pwd && user !== '' ? false : true}>
