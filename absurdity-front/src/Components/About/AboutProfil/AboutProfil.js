@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 import { Card, Image } from 'semantic-ui-react';
 
-function AboutProfil({image, name, role, description}) {
+function AboutProfil({image, name, role, description, idromain}) {
     return ( 
         <>
-        <Card>
+        <Card id={idromain}>
         <Image src={image} wrapped ui={false} />
         <Card.Content>
             <Card.Header>{name}</Card.Header>
@@ -24,7 +24,8 @@ AboutProfil.propTypes = {
     image: PropTypes.string,
     name: PropTypes.string,
     role: PropTypes.string,
-    description: PropTypes.string
+    description: PropTypes.string,
+    idromain: PropTypes.string
 }
 
 export default AboutProfil;

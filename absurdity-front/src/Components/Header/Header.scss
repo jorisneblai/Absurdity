@@ -7,7 +7,7 @@
 #Divider-Header{
     z-index: 100;
     position: fixed;
-    top:68px;
+    top:76px;
     width:98%;
     margin-left:1%;
     border: 10px solid $primary-color;
@@ -48,4 +48,4 @@
     animation: .5s ease-out 0s both logo_move;
 }
 
-@keyframes logo_move { from { filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(169deg) brightness(96%) contrast(101%); } to { filter: invert(50%) sepia(40%) saturate(424%) hue-rotate(169deg) brightness(96%) contrast(101%); }  }
+@keyframes logo_move { from { filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(169deg) brightness(96%) contrast(101%); } to { filter: invert(38%) sepia(19%) saturate(4817%) hue-rotate(160deg) brightness(60%) contrast(89%); }  }

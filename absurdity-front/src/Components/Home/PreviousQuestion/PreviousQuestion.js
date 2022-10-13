@@ -24,8 +24,8 @@ function PreviousQuestion( {questionTitle, user, userAnswer, path}) {
         </div>
         <p className='Previous-question_answer'>{userAnswer}</p>
         <NavLink to={path}>
-        <Button icon circular className="Home-questions_button">
-            <Icon name="ellipsis horizontal" />
+        <Button title="Voir les super réponses" icon circular className="Home-questions_button">
+            <Icon name="comment" />
         </Button>
         </NavLink>
     </Segment>

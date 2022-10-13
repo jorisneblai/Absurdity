@@ -108,6 +108,7 @@ const LogFormLogIn = () => {
                             value={pwd}
                             required
                         />
+                        {/*<a id="Forgotten-password" href="/retrieve/password">mot de passe oublié ?</a>*/}
                         <button className='Submit-button' disabled={pwd && user !== '' ? false : true}>
                             Se connecter
                         </button>

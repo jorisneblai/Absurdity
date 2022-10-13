@@ -16,8 +16,10 @@ form {
     padding-bottom: 1rem;
 }
 
-a, a:visited {
-    color: #fff;
+#Forgotten-password {
+    color: $primary-color;
+    font-size: small;
+    text-align: right;
 }
 
 h1 {

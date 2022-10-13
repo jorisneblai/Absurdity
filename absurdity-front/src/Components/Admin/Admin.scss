@@ -1,6 +1,6 @@
 @import "../../index.scss";
 .Admin {
-    max-width: 40%;
+    max-width: 60%;
     margin: 0 auto;
     text-align: center;
 }
@@ -44,3 +44,15 @@ li {
     padding-bottom: 1rem;
 }
 
+.AdminQuestionTitle {
+    max-width: fit-content;
+    overflow-wrap: break-word !important;
+}
+
+.MenuAdmin {
+    width:100% !important;
+}
+
+.AdminInputPatch > input {
+    font-size: medium;
+}

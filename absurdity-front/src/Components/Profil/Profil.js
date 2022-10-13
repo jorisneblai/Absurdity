@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import authHeader from '../../Middlewares/AuthHeader';
-import { Input, Label, Divider, Button, Confirm, Segment } from 'semantic-ui-react';
+import { Input, Button, Confirm, Segment } from 'semantic-ui-react';
 import './Profil.scss';
 import patchData from '../../Middlewares/PatchDataMiddleware';
 import DeleteDataMiddleware from '../../Middlewares/DeleteDataMiddleware';
@@ -21,9 +21,10 @@ function Profil() {
     const [valuePseudo, setValuePseudo] = useState(undefined);
     const [valuePassword, setValuePassword] = useState(undefined);
     const [openModal, setOpenModal] = useState(false);
+    const [deleteModal, setDeleteModal] = useState(false);
     const [validName, setValidName] = useState(false);
     const [validPassword, setValidPassword] = useState(false);
-   
+
 
     useEffect(() => {
         const f = async () => {
@@ -40,8 +41,7 @@ function Profil() {
     useEffect(() => {
         if (valuePseudo === undefined) {
             setValidName(true);
-        }
-        else {
+        } else {
             setValidName(USER_REGEX.test(valuePseudo));
         }
     }, [valuePseudo])
@@ -49,10 +49,10 @@ function Profil() {
     useEffect(() => {
         if (valuePassword === undefined) {
             setValidPassword(true);
-        }
-        else {
+        } else {
             setValidPassword(PWD_REGEX.test(valuePassword));
         }
+
     }, [valuePassword])
 
     function updateProfil(pseudo, password) {
@@ -73,108 +73,127 @@ function Profil() {
             }
         }
         updatePseudo();
-    }  
-    
+    }
+
     function deleteProfil() {
         const tryDeleteProfil = async () => {
-          const deleted = await DeleteDataMiddleware('user');
-          if (!deleted) {
-              console.log("Profil non supprimée");
-          } else {
-              console.log("Profil supprimée");
-              cookies.remove('user', { path: pathURL ,domain: domainURL});
-              //localStorage.removeItem('user');
-              navigate('/');
-          }
-      }
-      tryDeleteProfil();
-    
+            const deleted = await DeleteDataMiddleware('user');
+            if (!deleted) {
+                console.log("Profil non supprimée");
+            } else {
+                console.log("Profil supprimée");
+                cookies.remove('user', { path: pathURL, domain: domainURL });
+                //localStorage.removeItem('user');
+                navigate('/');
+            }
+        }
+        tryDeleteProfil();
+
     };
-        
-    
-    if(!data) {
+
+
+    if (!data) {
         return (
             <div className="App">Loading...</div>
         )
     } else {
-        return (  
+        return (
             <main className="Profil">
-            <Segment className='Profil-segment'>
-                <h1 className="Profil-title">
-                    Profil de {data.data.pseudo}
-                </h1>
-                <form 
-                    className="Profil-inputs"
-                    onSubmit={(event) => {
-                        event.preventDefault();
-                        setOpenModal(true);
-                       
-                    }}>
-                    <Input 
-                        className='Pseudo-input' 
-                        type='text' 
-                        placeholder='Changer de pseudo...' 
-                        name="pseudo" 
-                        value={valuePseudo}
-                        onChange={(event) => {
-                            setValuePseudo(event.target.value);
-                        }}
+                <Segment className='Profil-segment'>
+                    <h1 className="Profil-title">
+                        Profil de {data.data.pseudo}
+                    </h1>
+                    <div className='Divider-Question' />
+                    <form
+                        className="Profil-inputs"
+                        onSubmit={(event) => {
+                            event.preventDefault();
+                            setOpenModal(true);
+
+                        }}>
+                        <Input
+                            className='Pseudo-input'
+                            type='text'
+                            placeholder='Changer de pseudo...'
+                            name="pseudo"
+                            autoComplete="off"
+                            value={valuePseudo}
+                            onChange={(event) => {
+                                setValuePseudo(event.target.value);
+                            }}
                         >
-                        <Label className='Pseudo-label'>Pseudo</Label>
-                        <input />
-                    </Input>
-                    <Input 
-                        className='Pwd-input' 
-                        type='password' 
-                        placeholder='Changer de mot de passe...' 
-                        name="password" 
-                        value={valuePassword}
-                        onChange={(event) => {
-                            setValuePassword(event.target.value);
-                        }}
+                            <label className='Pseudo-label'>Pseudo</label>
+                            <p className="AdvicesSignUp">(entre 4 et 24 caractères et commençant par une lettre)</p>
+                            <input />
+                        </Input>
+                        <Input
+                            className='Pwd-input'
+                            type='password'
+                            autoComplete="off"
+                            placeholder='Changer de mot de passe...'
+                            name="password"
+                            value={valuePassword}
+                            onChange={(event) => {
+                                setValuePassword(event.target.value);
+                            }}
                         >
-                        <Label className='Pwd-label'>Mot de passe</Label>
-                        <input />
-                    </Input>
-                    <Divider />
-                    <Button 
-                        fluid
-                        disabled={!validName || !validPassword ? true : false
-                    }
-                        onClick={(event) => {
-                            setNewPseudo(event.target.value);
-                            console.log(newPseudo);
-                        }}
+                            <label className='Pwd-label'>Mot de passe</label>
+                            <p className="AdvicesSignUp">(entre 8 et 24 caractères dont au moins 1 majuscule, 1 minuscule et un chiffre)</p>
+                            <input />
+                        </Input>
+
+                        <Button
+                            id='UpdateProfilButton'
+                            fluid
+                            disabled={!validName || !validPassword ? true : false
+                            }
+                            onClick={(event) => {
+                                setNewPseudo(event.target.value);
+                                console.log(newPseudo);
+                            }}
                         >
                             Sauvegarder les modifications
+                        </Button>
+                        <Confirm
+                            open={openModal}
+                            content="Toute modification est définitive (enfin jusqu'au moment où tu changes d'avis quoi)"
+                            cancelButton="Je vais plutôt changer d'avis"
+                            confirmButton="Allez, changeons tout ça!"
+                            onCancel={() => { setOpenModal(false) }}
+                            onConfirm={(event) => {
+                                event.preventDefault();
+                                updateProfil(valuePseudo, valuePassword);
+                            }}
+
+                        />
+                    </form>
+                    <Button
+                        id='DeleteProfilButton'
+                        fluid
+                        onClick={() => {
+                            setDeleteModal(true);
+                        }}
+                    >
+                        Supprimer le profil
                     </Button>
                     <Confirm
-                        open={openModal}
-                        cancelButton='Mmmm...Finalement non'
-                        confirmButton="Allez, changeons tout ça!"
-                        onCancel={() => {setOpenModal(false)}}
+                        open={deleteModal}
+                        content="Attention voyageur de l'absurde ! Ceci est irréversible (un mot qui fait peur !). Es-tu sûr de vouloir supprimer définitivement et absolument et pour de vrai et pour toujours jusqu'à la fin des temps ton compte ?"
+                        cancelButton="Mais qu'allais-je faire...annulons cette action..."
+                        confirmButton="Tchao les nazes !"
+                        onCancel={() => { setDeleteModal(false) }}
                         onConfirm={(event) => {
-                            event.preventDefault();
-                            updateProfil(valuePseudo, valuePassword);
-                       }}
-                        
-                      />
-                </form>
-                    <Button 
-                        circular
-                        icon="trash alternate"
-                        onClick={() => {
                             deleteProfil();
                         }}
-                        >
-                            
-                    </Button>
-                    </Segment>
-            </main>
-        );}
-    }
-    
-    export default Profil;
-    
 
-        
+                    />
+                </Segment>
+            </main>
+        );
+    }
+}
+
+export default Profil;
+
+
+
