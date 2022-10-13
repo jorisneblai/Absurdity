@@ -80,14 +80,14 @@ const LogFormLogIn = () => {
     }
 
     function sendMail(mail) {
-        console.log(mail)
-        /* const content = {mail};
+
+        const content = {mail};
          axios.post(`${baseURL}retrieve/password`,
                      JSON.stringify({ content }),
                      {
                          headers: { 'Content-Type': 'application/json' },
                      }
-         );*/
+         );
     }
 
     return (
