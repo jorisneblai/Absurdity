@@ -6,7 +6,7 @@ import Cookies from 'universal-cookie';
  async function authHeader(route){
   const cookies = new Cookies();
 
-  const token = cookies.get('user') || null;
+  const token = cookies.get('user', { path: '/' ,domain: '.absurdity.vercel.app'}) || null;
   if(token === null) {return false}
   const baseURL = process.env.REACT_APP_API_URL;
 
@@ -21,7 +21,7 @@ import Cookies from 'universal-cookie';
     }
   }).catch((error) => {
     if(error.response.status === 511) {
-      cookies.remove('user');
+      cookies.remove('user', { path: '/' ,domain: '.absurdity.vercel.app'});
     }
     console.log(error)
     return false;

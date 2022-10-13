@@ -5,7 +5,7 @@ import Cookies from 'universal-cookie';
 
  async function patchData(route, content){
   const cookies = new Cookies();
-  const token = cookies.get('user') || null;
+  const token = cookies.get('user', { path: '/' ,domain: '.absurdity.vercel.app'}) || null;
   if(token === null) {return false}
   const baseURL = process.env.REACT_APP_API_URL;
   
@@ -19,7 +19,7 @@ import Cookies from 'universal-cookie';
       console.log('Content modified', response.data)
       if (response.data.data && response.data.data.token) {
         console.log('ici')
-        cookies.set("user", response.data.data.token, { path: '/' });
+        cookies.set("user", response.data.data.token, { path: '/' ,domain: '.absurdity.vercel.app'});
       }
       return response.data;
     } else {

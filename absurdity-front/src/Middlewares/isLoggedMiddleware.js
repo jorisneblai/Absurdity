@@ -3,7 +3,7 @@ import Cookie from 'universal-cookie'
 
 export default function isLoggedMiddleware() {
 const cookies = new Cookie();
-const isLogged = cookies.get('user');
+const isLogged = cookies.get('user', { path: '/' ,domain: '.absurdity.vercel.app'});
 
 if(isLogged) {
      return true

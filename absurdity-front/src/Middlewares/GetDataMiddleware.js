@@ -5,7 +5,7 @@ import Cookies from 'universal-cookie';
 
  async function getData(route){
   const cookies = new Cookies();
-  const token = cookies.get('user') || 'No Token';
+  const token = cookies.get('user', { path: '/' ,domain: '.absurdity.vercel.app'}) || 'No Token';
   
   const baseURL = process.env.REACT_APP_API_URL;
 

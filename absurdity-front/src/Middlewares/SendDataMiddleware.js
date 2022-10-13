@@ -3,7 +3,7 @@ import Cookies from 'universal-cookie';
 
  async function sendDataMiddleware(route, answer){
   const cookies = new Cookies();
-  const token = cookies.get('user') || null;
+  const token = cookies.get('user', { path: '/' ,domain: '.absurdity.vercel.app'}) || null;
   const content = answer;
   if(token === null) {return false}
   const baseURL = process.env.REACT_APP_API_URL;
