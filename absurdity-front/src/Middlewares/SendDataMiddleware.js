@@ -1,9 +1,11 @@
 import axios from 'axios';
 import Cookies from 'universal-cookie';
+const pathURL = process.env.REACT_APP_PATH;
+const domainURL = process.env.REACT_APP_DOMAIN;
 
  async function sendDataMiddleware(route, answer){
   const cookies = new Cookies();
-  const token = cookies.get('user') || null;
+  const token = cookies.get('user', { path: pathURL ,domain: domainURL}) || null;
   const content = answer;
   if(token === null) {return false}
   const baseURL = process.env.REACT_APP_API_URL;

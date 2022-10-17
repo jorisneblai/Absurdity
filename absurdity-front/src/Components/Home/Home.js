@@ -1,4 +1,4 @@
-import { Input, Segment, Header, Button, Icon, Message } from 'semantic-ui-react';
+import { TextArea, Segment, Header, Button, Icon, Message } from 'semantic-ui-react';
 import './Home.scss';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
@@ -7,10 +7,16 @@ import authHeader from '../../Middlewares/AuthHeader';
 import sendDataMiddleware from '../../Middlewares/SendDataMiddleware';
 import PreviousQuestion from './PreviousQuestion/PreviousQuestion';
 
+const WHITESPACE_REGEX = /.*\S.*/;
+const LENGTH_REGEX = /^.{1,250}$/
+
+
 function Home() {
     const [data, setData] = useState(null);
     const [connected, setConnected] = useState(false);
-    const [value, setValue] = useState('')
+    const [value, setValue] = useState('');
+    const [validWhitespace, setValidWhitespace] = useState(false);
+    const [validLength, setValidLength] = useState(false);
     const [answered, setAnswered] = useState(null);
     const [questionsList, setQuestionsList] = useState(null);
     /*
@@ -19,6 +25,7 @@ function Home() {
     const [ topQuestion, setTopQuestion ] = useState(null);
     */
     useEffect(() => {
+        window.scrollTo(0, 0);
         const connect = async () => {
             const newData = await authHeader('user');
             if (!newData) {
@@ -44,11 +51,15 @@ function Home() {
                 setQuestionsList(null)
             } else {
                 setQuestionsList(newData);
-
             }
         }
         allQuestions();
     }, []);
+
+    useEffect(() => {
+        setValidWhitespace(WHITESPACE_REGEX.test(value));
+        setValidLength(LENGTH_REGEX.test(value));
+    }, [value])
 
     function sendAnswer() {
         const trySendAnswer = async () => {
@@ -68,17 +79,18 @@ function Home() {
     return (
         <main className="Home">
             <Header className="Home-title">
-                Absurdity, des vannes à toutes heures. L'absurdité dans toute sa Chandeleur.
+                Il n'y a pas de question idiote, que des réponses absurdes.
             </Header>
             <Segment className="Home-top_question">
                 <Header className="Home-top_question-title" as="h2">
-                    Question du jour :
+                    Question du jour
+                    <div className='Divider-Question'/>
                 </Header>
                 <p className="Home-top_question-para">
-                    {!data ? "Loading..." : data.data.content}
+                    {!data ? "Chargement des absurdités..." : data.data.content}
                 </p>
                 {answered === true ?
-                    <Message positive>
+                    <Message positive className='Home-PositiveMessage'>
                         <Message.Header>Votre réponse a bien été envoyée!</Message.Header>
                         <p>
                             On sait pas où, mais...elle a été envoyée...
@@ -87,14 +99,14 @@ function Home() {
                     : ''
                 }
                 {answered === false && connected ?
-                    <Message negative >
+                    <Message negative className='Home-PositiveMessage' >
                         <Message.Header>Euh, attends t'as pas déjà répondu toi ?</Message.Header>
-                        <p>Parce que tu ressemble vachement à quelqu'un qui aurait déjà répondu quand même.</p>
+                        <p>Parce que vous ressemblez vachement à quelqu'un qui aurait déjà répondu quand même.</p>
                     </Message>
                     : ''
                 }
                 {answered === false && !connected ?
-                    <Message negative >
+                    <Message negative className='Home-PositiveMessage' >
                         <Message.Header>Hop, hop, hop, papier du véhicule</Message.Header>
                         <p>(ou un pot de vin)</p>
                         <Link className='Link-Login' to='login'>Ici pour faire la carte grise</Link>
@@ -103,32 +115,33 @@ function Home() {
                 }
                 {answered === null ?
                     <form
+
                         className="Home-form"
                         onSubmit={(event) => {
                             event.preventDefault();
                             sendAnswer();
                         }}>
 
-                        <Input
-                            action={{ icon: "arrow alternate circle right" }}
-                            placeholder='Écrivez votre réponse...'
+                        <TextArea className="TextArea-Home"
+                            placeholder='Pour répondre, connectez-vous...'
                             disabled={connected ? false : true}
                             value={value}
                             onChange={(event) => {
                                 setValue(event.target.value);
                             }}
-                            fluid
+                            maxLength="250"
                         />
+                        <Button icon='angle right' className={connected ?"TextArea-Disabled" : "TextArea-Send" } disabled={connected && validWhitespace && validLength ? false : true}></Button>
+                            
+                        
                     </form>
                     : ''
                 }
                 {data ?
-                <Button icon circular className="Home-questions_button" as='a' href={`/question/${data.data.id}`}>
-                    <Icon name="ellipsis horizontal" />
+                <Button title='Voir les super réponses' icon circular className="Home-questions_button" as='a' href={`/question/${data.data.id}`}>
+                    <Icon name="comment" />
                 </Button>
-                : <Button icon circular className="Home-questions_button" as='a'>
-                    <Icon name="ellipsis horizontal" />
-                </Button>
+                : ''
                 }
             </Segment>
 

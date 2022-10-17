@@ -6,7 +6,7 @@ import authHeader from '../../Middlewares/AuthHeader';
 import sendDataMiddleware from '../../Middlewares/SendDataMiddleware';
 import deleteDataMiddleware from '../../Middlewares/DeleteDataMiddleware';
 import patchData from '../../Middlewares/PatchDataMiddleware';
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function Admin() {
 
@@ -20,6 +20,7 @@ function Admin() {
     const [patchValue, setPatchValue] = useState('');
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         const connect = async () => {
             const newData = await authHeader('user');
             if (!newData) {
@@ -30,166 +31,167 @@ function Admin() {
             }
         }
         connect();
-       
-    
-    const allQuestions = async () => {
-          const newDataQuestions = await getData('admin/questions');
-          if (!newDataQuestions) {
-              setQuestionsList(null);
-          } else {
-              setQuestionsList(newDataQuestions);
-            console.log(newDataQuestions);
-          }
-      }
-      allQuestions();
-  }, [navigate]);
 
-  function createQuestion() {
-    const tryCreateQuestion = async () => {
-        const delivered = await sendDataMiddleware('questions', value);
-        if (!delivered) {
-            console.log("Question créée");
-            setCreatedQuestion(false);
-        } else {
-            console.log("Question non créée");
-            setCreatedQuestion(true);
-            setValue('');
-            window.location.reload();
+
+        const allQuestions = async () => {
+            const newDataQuestions = await getData('admin/questions');
+            if (!newDataQuestions) {
+                setQuestionsList(null);
+                navigate('/');
+            } else {
+                setQuestionsList(newDataQuestions);
+            }
         }
+        allQuestions();
+    }, [navigate]);
+
+    function createQuestion() {
+        const tryCreateQuestion = async () => {
+            const delivered = await sendDataMiddleware('questions', value);
+            if (!delivered) {
+                console.log("Question créée");
+                setCreatedQuestion(false);
+            } else {
+                console.log("Question non créée");
+                setCreatedQuestion(true);
+                setValue('');
+                window.location.reload();
+            }
+        }
+        tryCreateQuestion();
+    };
+
+    function deleteQuestion(path) {
+        const questionPath = 'question/' + path;
+        const tryDeleteQuestion = async () => {
+            const deleted = await deleteDataMiddleware(questionPath);
+            if (!deleted) {
+                console.log("Question non supprimée");
+            } else {
+                console.log("Question supprimée");
+                window.location.reload();
+            }
+        }
+        tryDeleteQuestion();
+    };
+
+    function patchQuestion(path) {
+        const questionContent = 'question/' + path;
+        const tryPatchQuestion = async () => {
+            const patched = await patchData(questionContent, patchValue);
+            if (!patched) {
+                console.log("Question non modifiée")
+            } else {
+                console.log("Question modifiée");
+                window.location.reload();
+
+            }
+        }
+        tryPatchQuestion();
+
     }
-    tryCreateQuestion();
-};
-
-function deleteQuestion(path) {
-    const questionPath = 'question/' + path;
-    const tryDeleteQuestion = async () => {
-      const deleted = await deleteDataMiddleware(questionPath);
-      if (!deleted) {
-          console.log("Question non supprimée");
-      } else {
-          console.log("Question supprimée");
-          window.location.reload();
-      }
-  }
-  tryDeleteQuestion();
-  };
-
-  function patchQuestion(path) {
-    const questionContent = 'question/' + path;
-    const tryPatchQuestion = async () => {
-      const patched = await patchData(questionContent, patchValue);
-      if (!patched) {
-        console.log("Question non modifiée")
-      } else {
-        console.log("Question modifiée");
-        window.location.reload();
-
-      }
-    }
-    tryPatchQuestion();
-
-  } 
 
     return (
         <main className="Admin">
-       <Segment className="Admin-question">
+            <Segment className="Admin-question">
                 <Header className="Admin-question-title" as="h2">
                     Crée ta question :
                 </Header>
 
                 {createdQuestion === true ?
-      <Message positive>
-          <Message.Header>Ta question a bien été créée!</Message.Header>
-          <p>
-              Tu peux lire Émile Zola ou Picsou Magazine en attendant les réponses
-          </p>
-      </Message>
-      : ''
-  }
- 
-  {createdQuestion === false && !connected ?
-      <Message negative >
-          <Message.Header>Ta question n'a pas été créée</Message.Header>
-          <p>Retente ta chance</p>
-      </Message>
-      : ''
-  }
-  {createdQuestion === null ?
-      <form
-          className="Admin-form"
-          onSubmit={(event) => {
-            event.preventDefault();
-              createQuestion();
-          }}>
+                    <Message positive>
+                        <Message.Header>Ta question a bien été créée!</Message.Header>
+                        <p>
+                            Tu peux lire Émile Zola ou Picsou Magazine en attendant les réponses
+                        </p>
+                    </Message>
+                    : ''
+                }
 
-          <Input
-              action={{ icon: "arrow alternate circle right" }}
-              placeholder='Écrivez votre question...'
-              disabled={connected ? false : true}
-              value={value}
-              onChange={(event) => {
-                  setValue(event.target.value);
-              }}
-              fluid
-          />
-      </form>
-      : ''
-  }
+                {createdQuestion === false && !connected ?
+                    <Message negative >
+                        <Message.Header>Ta question n'a pas été créée</Message.Header>
+                        <p>Retente ta chance</p>
+                    </Message>
+                    : ''
+                }
+                {createdQuestion === null ?
+                    <form
+                        className="Admin-form"
+                        onSubmit={(event) => {
+                            event.preventDefault();
+                            createQuestion();
+                        }}>
 
-        </Segment>
+                        <Input
+                            action={{ icon: "arrow alternate circle right" }}
+                            placeholder='Écrivez votre question...'
+                            disabled={connected ? false : true}
+                            value={value}
+                            onChange={(event) => {
+                                setValue(event.target.value);
+                            }}
+                            fluid
+                        />
+                    </form>
+                    : ''
+                }
+
+            </Segment>
 
 
 
-        {questionsList ? (
+            {questionsList ? (
                 <ul>
                     {questionsList.data.map((question) => {
                         return (
-                        <li key={question.id}>
-                        <Menu borderless>
-                        {patchInput !== question.id ? 
-                        <Menu.Item position="left">
-                        {question.content}
-                        </Menu.Item> : <form
-                        onSubmit={(event) => {
-                          event.preventDefault();
-                          patchQuestion(question.id);
-                        }}
-                                 
-                        >
-                        <Input
-                         action={{ icon: "arrow alternate circle right" }}
-                         value={patchValue}
-                         onChange={(event) => {
-                             setPatchValue(event.target.value);
-                         }}
-                         fluid
-                        >
-                        
-                        </Input>
-                     
-                        </form>}
+                            <li key={question.id}>
+                                <Menu borderless vertical className='MenuAdmin'>
+                                    {patchInput !== question.id ?
+                                        <Menu.Item className='AdminQuestionTitle'>
+                                            {question.content}
+                                        </Menu.Item> : <form
+                                            onSubmit={(event) => {
+                                                event.preventDefault();
+                                                patchQuestion(question.id);
+                                            }}
 
-                        <Menu.Item position="right">
-                            <Button floated="right" 
-                           onClick={() => {
-                            setPatchInput(question.id)
-                            
-                            }}
-                            >
-                              <Icon name="pencil alternate"/>
-                              </Button>
-                              
-                               <Button floated="right"
-                               onClick={() => {
-                                deleteQuestion(question.id);
-                              }}>
-                             <Icon name="trash alternate"
-                            /> 
-   
-                            </Button> 
-                            </Menu.Item>
-                        </Menu>
-                        </li>)
+                                        >
+                                            <Input
+                                            className='AdminInputPatch'
+                                                action={{ icon: "arrow alternate circle right" }}
+                                                value={patchValue}
+                                                onChange={(event) => {
+                                                    setPatchValue(event.target.value);
+                                                }}
+                                                fluid
+                                            >
+
+                                            </Input>
+
+                                        </form>}
+
+                                    <Menu.Item>
+                                        <Button
+                                            onClick={() => {
+                                                setPatchInput(question.id)
+                                                setPatchValue(question.content)
+                                            }}
+                                        >
+                                            <Icon name="pencil alternate" />
+                                        </Button>
+
+                                        <Button
+                                            onClick={() => {
+                                                deleteQuestion(question.id);
+                                            }}>
+                                            <Icon name="trash alternate"
+                                            />
+
+                                        </Button>
+                                    </Menu.Item>
+                                </Menu>
+                            </li>)
                     })}
                 </ul>
             ) : ''}

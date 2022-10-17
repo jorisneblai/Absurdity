@@ -2,11 +2,13 @@
 
 import axios from 'axios';
 import Cookie from 'universal-cookie'
+const pathURL = process.env.REACT_APP_PATH;
+const domainURL = process.env.REACT_APP_DOMAIN;
 
  async function DeleteDataMiddleware(route){
    const cookies = new Cookie()
 
-  const token = cookies.get('user') || null;
+  const token = cookies.get('user', { path: pathURL ,domain: domainURL}) || null;
   if(token === null) {return false}
   const baseURL = process.env.REACT_APP_API_URL;
   console.log(token);

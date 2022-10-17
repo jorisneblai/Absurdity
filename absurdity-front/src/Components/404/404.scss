@@ -1,10 +1,73 @@
 .Error-Page {
     text-align: center;
     .Error-title {
-        font-size: 10rem;
-        font-family: 'Courier New', Courier, monospace;
+        position:absolute;
+        top:20%;
+        left:45%;
+        font-size: 5rem;
+        animation-name: spin;
+        animation-duration: 5000ms;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear; 
+    }
+    .Error-title-zero {
+        display: block;
+        animation-name: spininverse;
+        animation-duration: 5000ms;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear; 
     }
     .Error-subtitle {
+        position:absolute;
+        top:50%;
+        left:33%;
+        margin-top: 3rem;
         font-size: xx-large;
+        animation: circle 6s linear infinite;
+    }
+    .Error-subtitle-lol {
+        position:absolute;
+        top:50%;
+        left:33%;
+        margin-top: 3rem;
+        font-size: xx-large;
+        opacity: 0;
+        animation: circle 6s linear infinite, transition 2s linear 5s forwards;
+
     }
 }
+
+@keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
+}
+@keyframes spininverse {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(-360deg);
+    }
+}
+
+@keyframes circle{
+    0%{
+      transform:rotate(0deg)
+                translate(-165px)
+                rotate(0deg);
+    
+    }
+    100%{
+      transform:rotate(-360deg)
+                translate(-165px)
+                rotate(-360deg);
+    }
+  }
+  @keyframes transition {
+    0%   { opacity:0; }
+    100% { opacity:1; }
+    }

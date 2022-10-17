@@ -5,6 +5,8 @@ import authHeader from '../../../Middlewares/AuthHeader';
 import { useEffect } from 'react';
 import isLoggedMiddleware from '../../../Middlewares/isLoggedMiddleware';
 import Cookies from 'universal-cookie';
+const pathURL = process.env.REACT_APP_PATH;
+const domainURL = process.env.REACT_APP_DOMAIN;
 
 function NavBar() {
     const cookies = new Cookies();
@@ -25,8 +27,9 @@ function NavBar() {
 
 
     function logOut() {
-        cookies.remove('user');
-        window.location.reload();
+        console.log(cookies.getAll())
+        cookies.remove('user', {path: pathURL, domain: domainURL});
+         window.location.reload();
     };
 
     return (
@@ -47,10 +50,13 @@ function NavBar() {
                         <Dropdown.Item as={NavLink} to="/">Accueil</Dropdown.Item>
                         <Dropdown.Item as={NavLink} to="/about">À propos</Dropdown.Item>
                         <Dropdown.Item as={NavLink} to="/cgu">CGU</Dropdown.Item>
-                        {isLoggedMiddleware() 
+                        {isLoggedMiddleware()
                             ? <Dropdown.Item
                                 id='LogOutButton'
-                                onClick={() => logOut()}
+                                onClick={(event) => {
+                                    event.preventDefault();
+                                    logOut()
+                                }}
                             >
                                 Se déconnecter
                             </Dropdown.Item>

@@ -2,10 +2,12 @@
 
 import axios from 'axios';
 import Cookies from 'universal-cookie';
+const pathURL = process.env.REACT_APP_PATH;
+const domainURL = process.env.REACT_APP_DOMAIN;
 
  async function getData(route){
   const cookies = new Cookies();
-  const token = cookies.get('user') || 'No Token';
+  const token = cookies.get('user', { path: pathURL ,domain: domainURL}) || 'No Token';
   
   const baseURL = process.env.REACT_APP_API_URL;
 
@@ -20,7 +22,7 @@ import Cookies from 'universal-cookie';
       return false;
     }
   }).catch((error) => {
-    console.log(error)
+   console.log(error)
     return false;
   })
   return data;
